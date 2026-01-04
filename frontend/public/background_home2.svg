@@ -1,0 +1,81 @@
+<svg id="visual" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" preserveAspectRatio="xMidYMid slice">
+  <style xmlns="">
+    @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    }
+
+    #element-2 {
+    animation: pulse 2.5s ease 0s infinite alternate both;
+    }
+
+    @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    }
+
+    #element-3 {
+    animation: pulse 2s ease-in 0.3s infinite alternate both;
+    }
+
+    @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    }
+
+    #element-5 {
+    animation: pulse 2.5s ease-in 0s infinite alternate both;
+    }
+
+    @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    }
+
+    #element-6 {
+    animation: pulse 2s ease-in 0.3s infinite alternate both;
+    }
+  </style>
+  <rect x="0" y="0" width="900" height="600" fill="#1a1a1a" id="element-0" />
+  <defs>
+    <linearGradient id="grad1_0" x1="33.3%" y1="0%" x2="100%" y2="100%">
+      <stop offset="20%" stop-color="#69d364" stop-opacity="1" />
+      <stop offset="80%" stop-color="#69d364" stop-opacity="1" />
+    </linearGradient>
+  </defs>
+  <defs>
+    <linearGradient id="grad1_1" x1="33.3%" y1="0%" x2="100%" y2="100%">
+      <stop offset="20%" stop-color="#69d364" stop-opacity="1" />
+      <stop offset="80%" stop-color="#1a1a1a" stop-opacity="1" />
+    </linearGradient>
+  </defs>
+  <defs>
+    <linearGradient id="grad2_0" x1="0%" y1="0%" x2="66.7%" y2="100%">
+      <stop offset="20%" stop-color="#69d364" stop-opacity="1" />
+      <stop offset="80%" stop-color="#69d364" stop-opacity="1" />
+    </linearGradient>
+  </defs>
+  <defs>
+    <linearGradient id="grad2_1" x1="0%" y1="0%" x2="66.7%" y2="100%">
+      <stop offset="20%" stop-color="#1a1a1a" stop-opacity="1" />
+      <stop offset="80%" stop-color="#69d364" stop-opacity="1" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(900, 0)" id="element-1">
+    <path
+      d="M0 297.5C-24.3 298.4 -48.5 299.3 -64.5 282.7C-80.5 266.2 -88.2 232.2 -106.3 220.7C-124.4 209.3 -152.8 220.3 -170.8 214.2C-188.9 208.2 -196.7 185.1 -209.5 167.1C-222.4 149.1 -240.4 136.3 -246 118.5C-251.5 100.6 -244.6 77.8 -250.6 57.2C-256.5 36.6 -275.2 18.3 -294 0L0 0Z"
+      fill="#43703e" id="element-2" />
+    <path
+      d="M0 148.7C-12.1 149.2 -24.3 149.6 -32.3 141.4C-40.3 133.1 -44.1 116.1 -53.2 110.4C-62.2 104.6 -76.4 110.1 -85.4 107.1C-94.5 104.1 -98.3 92.5 -104.8 83.5C-111.2 74.6 -120.2 68.1 -123 59.2C-125.8 50.3 -122.3 38.9 -125.3 28.6C-128.2 18.3 -137.6 9.2 -147 0L0 0Z"
+      fill="#69d364" id="element-3" />
+  </g>
+  <g transform="translate(0, 600)" id="element-4">
+    <path
+      d="M0 -292C24.8 -297.9 49.6 -303.7 66.2 -290C82.8 -276.3 91.2 -242.9 112.8 -234.3C134.4 -225.6 169.1 -241.6 183.3 -229.9C197.5 -218.1 191.1 -178.7 193.1 -154C195.1 -129.3 205.6 -119.3 222.5 -107.2C239.5 -95.1 262.9 -81 274.9 -62.8C286.9 -44.5 287.5 -22.3 288 0L0 0Z"
+      fill="#43703e" id="element-5" />
+    <path
+      d="M0 -146C12.4 -148.9 24.8 -151.9 33.1 -145C41.4 -138.1 45.6 -121.5 56.4 -117.1C67.2 -112.8 84.6 -120.8 91.7 -114.9C98.7 -109.1 95.5 -89.4 96.6 -77C97.6 -64.6 102.8 -59.6 111.3 -53.6C119.7 -47.5 131.5 -40.5 137.5 -31.4C143.5 -22.3 143.7 -11.1 144 0L0 0Z"
+      fill="#69d364" id="element-6" />
+  </g>
+</svg>
