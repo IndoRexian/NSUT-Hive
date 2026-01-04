@@ -20,6 +20,8 @@ class Config(BaseSettings):
 
     TZ: ZoneInfo = ZoneInfo("Asia/Kolkata")
 
+    SMTP_KEY: str
+
     model_config = SettingsConfigDict(env_file=".env")
 
 

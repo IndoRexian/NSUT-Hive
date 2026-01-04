@@ -38,7 +38,11 @@ async def login(body: Email, db: Session = Depends(get_db)):
     """
     Login
     """
-    create_otp_entry(body.email, datetime.datetime.now(tz=ZoneInfo("Asia/Kolkata")), db)
+
+    otp = create_otp_entry(
+        body.email, datetime.datetime.now(tz=ZoneInfo("Asia/Kolkata")), db
+    )
+    signin_request(body.email, otp)
     return {"status": "Done"}
 
 

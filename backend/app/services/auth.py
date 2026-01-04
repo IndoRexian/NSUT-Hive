@@ -19,7 +19,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/verify-otp")  # for docs o
 
 def create_otp_entry(
     email: str, created_at: datetime, db: Session = Depends(get_db)
-) -> None:
+) -> str:
     otp = pyotp.TOTP(pyotp.random_base32()).now()
     print(otp)
     otp_entry = schema.OTPTOKEN(
@@ -48,7 +48,7 @@ def create_otp_entry(
         db.add(otp_entry)
         db.commit()
     print(data)
-    return None
+    return otp
 
 
 def force_expire_otp(email: str, otp: str, db: Session = Depends(get_db)):

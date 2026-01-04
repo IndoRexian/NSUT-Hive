@@ -13,32 +13,37 @@ import datetime
 import ssl
 import time
 from email.message import EmailMessage
-from smtplib import SMTP, SMTP_SSL
+from smtplib import SMTP
 from zoneinfo import ZoneInfo
 
 import pyotp
+from core.config import config
 
 
-def signin_request(email: str):
+def signin_request(email: str, otp: str):
     context = ssl.create_default_context()
     with SMTP("smtp-relay.brevo.com", 587) as server:
         server.starttls(context=context)
+        key = config.SMTP_KEY
         server.login(
             "indo.rexian@gmail.com",
-            "xsmtpsib-b5d6c03eb4424129b8ee549a82e717ba2afe9fda8c34258308aee4530975ad45-BvUWPDjZChs8CWsc",
+            key,
         )
         msg = EmailMessage()
         msg["From"] = "indo.rexian@gmail.com"
         msg["To"] = email
-        msg["Subject"] = "Test email"
-        otp = pyotp.OTP(pyotp.random_base32())
+        msg["Subject"] = "Login To NSH"
         created_at = datetime.datetime.now(tz=ZoneInfo("Asia/Kolkata"))
         expires_at = created_at + datetime.timedelta(minutes=10)
         msg.set_content(otp)
-        server.send_message(msg)
+        try:
+            server.send_message(msg)
+            return True
+        except:
+            return False
 
 
-'''def verify_otp(otp: str, email: str):
+"""def verify_otp(otp: str, email: str):
     response = supabase.auth.verify_otp(
         {
             "email": email,
@@ -47,4 +52,4 @@ def signin_request(email: str):
         }
     )
     return response
-'''
+"""
