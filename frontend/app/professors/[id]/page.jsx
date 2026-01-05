@@ -12,19 +12,16 @@ import { cookies } from "next/headers";
 async function getUserReactions(profid) {
     try {
         const cookieStore = await cookies(); // Get cookies from the incoming browser request
-
-        const res = await fetch(
-            "http://127.0.0.1:8000/review/reaction/getuser/",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Cookie: cookieStore.toString(), // <--- CRITICAL: Manually forward the cookie
-                },
-                body: JSON.stringify({ profid }),
-                cache: "no-store", // Ensure fresh data on every request
+        API_URL = process.env.API_URL;
+        const res = await fetch(`${API_URL}/review/reaction/getuser/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Cookie: cookieStore.toString(), // <--- CRITICAL: Manually forward the cookie
             },
-        );
+            body: JSON.stringify({ profid }),
+            cache: "no-store", // Ensure fresh data on every request
+        });
 
         if (!res.ok) return null;
         return res.json();
