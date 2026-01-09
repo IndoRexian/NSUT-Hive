@@ -170,7 +170,7 @@ def api_get_user_reactions(
 @router.get("/review/cat/")
 def api_get_reviews(
     profid: int = None,
-    token: Annotated[str | None, Cookie()] = None,
+    # token: Annotated[str | None, Cookie()] = None,
     db: Session = Depends(get_db),
 ):
     """
@@ -181,7 +181,7 @@ def api_get_reviews(
     :param userid: Description
     :type userid: uuid.UUID
     """
-    data2 = get_user_reactions(token, profid, db)
+    # data2 = get_user_reactions(token, profid, db)
     data = get_cat_prof(profid, db)
     if not data:
         raise HTTPException(404, detail="No review found for the Professor.")

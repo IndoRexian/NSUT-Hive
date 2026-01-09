@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { Card, Button, Text } from "@heroui/react";
+import { Card, Text } from "@heroui/react";
 import { getList } from "./professors/Reviews";
 import placeHolderPFP from "../../public/placeholder_pfp.svg";
 import Link from "next/link";
 
 export default function ProfCard({ profData, deptData }) {
     //console.log(profData);
-    const starsSystem = getList(profData.global, 32);
+    const starsSystem = getList(profData.global_rating, 32);
     return (
         <Link href={`/professors/${profData.public_id}`}>
             <Card
@@ -79,7 +79,7 @@ export default function ProfCard({ profData, deptData }) {
                             >
                                 {starsSystem.map((element) => element)}
                                 <h1 className="text-white">
-                                    ({profData.global.toFixed(1)})
+                                    ({profData.global_rating.toFixed(1)})
                                 </h1>
                             </div>
                         </Card.Footer>

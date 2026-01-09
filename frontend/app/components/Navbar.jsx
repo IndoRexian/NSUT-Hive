@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import { Avatar, Button, Dropdown, Separator } from "@heroui/react";
 import { generateAvatarFromStyle } from "../lib/userdata";
 import { Icon } from "@iconify/react";
+import { deleteCookie } from "../lib/auth";
 
 function userDataNav(data) {
     return (
@@ -38,7 +39,9 @@ function userDataNav(data) {
                             className="rounded-lg in-hover:bg-[#1A1A1A]
                                 hover:ring hover:ring-red-500 m-0
                                 hover:text-red-500 text-white"
-                            href="/logout"
+                            onPress={() => {
+                                deleteCookie();
+                            }}
                         >
                             Logout
                         </Dropdown.Item>

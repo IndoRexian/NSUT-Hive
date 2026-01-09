@@ -55,7 +55,7 @@ def calculate_rating_per_cat(reviews_count: int, data: list):
 
     :param reviews_count: Description
     :type reviews_count: int
-    :param data: Description
+    :param data: The list for that specific CAT
     :type data: list
     """
     try:

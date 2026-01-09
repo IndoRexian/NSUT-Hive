@@ -8,32 +8,33 @@ import Reviews from "@/app/components/professors/Reviews";
 import { getReviewsOfProf } from "@/app/lib/api";
 import { Toaster } from "sonner";
 import { cookies } from "next/headers";
-//import { getUserReactions } from "@/app/lib/api";
-async function getUserReactions(profid) {
-    try {
-        const cookieStore = await cookies(); // Get cookies from the incoming browser request
-        API_URL = process.env.API_URL;
-        const res = await fetch(`${API_URL}/review/reaction/getuser/`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Cookie: cookieStore.toString(), // <--- CRITICAL: Manually forward the cookie
-            },
-            body: JSON.stringify({ profid }),
-            cache: "no-store", // Ensure fresh data on every request
-        });
+import { getUserReactions } from "@/app/lib/api";
+// async function getUserReactions(profid) {
+//     try {
+//         const cookieStore = await cookies(); // Get cookies from the incoming browser request
+//         API_URL = process.env.API_URL;
+//         const res = await fetch(`${API_URL}/review/reaction/getuser/`, {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 Cookie: cookieStore.toString(), // <--- CRITICAL: Manually forward the cookie
+//             },
+//             body: JSON.stringify({ profid }),
+//             cache: "no-store", // Ensure fresh data on every request
+//         });
 
-        if (!res.ok) return null;
-        return res.json();
-    } catch (e) {
-        throw new Error("BACKEND DOWN");
-    }
-}
+//         if (!res.ok) return null;
+//         return res.json();
+//     } catch (e) {
+//         throw new Error("BACKEND DOWN");
+//     }
+// }
 export default async function page({ params }) {
     const { id } = await params;
     const profData = await getProfessorByPublicID(id);
     const profReviews = await getReviewsOfProf(profData.professor_id);
     const userReactions = await getUserReactions(profData.professor_id);
+    console.log(userReactions);
     return (
         <div className="flex flex-wrap sm:flex-nowrap gap-0 sm:gap-2">
             <div className="flex basis-auto w-full sm:w-1/2 sm:h-[90vh]">

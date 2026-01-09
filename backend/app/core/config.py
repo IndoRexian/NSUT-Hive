@@ -8,6 +8,7 @@ load_dotenv()
 
 class Config(BaseSettings):
     app_name: str = "RMP"
+    environment: str
     debug: bool = False
     db_user: str = ""
     db_password: str = ""

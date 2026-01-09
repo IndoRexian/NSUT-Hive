@@ -13,122 +13,6 @@ from sqlalchemy import case, delete, exc, select, update
 from sqlalchemy.orm import Session
 
 
-def create_review(
-    professor_id: int,
-    token: str,
-    CAT_1: float,
-    CAT_2: float,
-    CAT_3: float,
-    CAT_4: float,
-    review_text: str = None,
-    db: Session = Depends(get_db),
-):
-    """
-    Create a Review. Get a 422 if UserID<->ProfID pair already exists
-
-    :param professor_id: Description
-    :type professor_id: int
-    :param user_id: Description
-    :type user_id: uuid.UUID
-    :param CAT_1: Description
-    :type CAT_1: float
-    :param CAT_2: Description
-    :type CAT_2: float
-    :param CAT_3: Description
-    :type CAT_3: float
-    :param CAT_4: Description
-    :type CAT_4: float
-    :param review_text: Description
-    :type review_text: str
-    :param db: Description
-    :type db: Session
-    """
-    user_data = get_current_user(token, db)
-    new_review = schema.Review(
-        professor_id=professor_id,
-        user_id=user_data.user_id,
-        created_at=datetime.now(tz=config.TZ),
-        cat_1=CAT_1,
-        cat_2=CAT_2,
-        cat_3=CAT_3,
-        cat_4=CAT_4,
-        review_text=review_text,
-    )
-    db.add(new_review)
-    db.commit()
-    # db.refresh(new_review)
-    return {"detail": "Success"}
-
-
-def get_review(user_id: uuid.UUID, professor_id: int, db: Session = Depends(get_db)):
-    """
-    Get review of a Professor by a User
-
-    :param user_id: Description
-    :type user_id: uuid.UUID
-    :param professor_id: Description
-    :type professor_id: int
-    :param db: Description
-    :type db: Session
-    """
-    data = db.execute(
-        select(schema.Review)
-        .where(schema.Review.user_id == user_id)
-        .where(schema.Review.professor_id == professor_id)
-    )
-    return data.scalars().first()
-
-
-def delete_review(token: str, professor_id: int, db: Session = Depends(get_db)):
-    """
-    Delete review of a Professor by a User
-
-    :param user_id: Description
-    :type user_id: uuid.UUID
-    :param professor_id: Description
-    :type professor_id: int
-    :param db: Description
-    :type db: Session
-    """
-    user_data = get_current_user(token, db)
-    db.execute(
-        delete(schema.Review)
-        .where(schema.Review.user_id == user_data.user_id)
-        .where(schema.Review.professor_id == professor_id)
-    )
-    db.commit()
-    return {"detail": "Success"}
-
-
-def edit_review(
-    professor_id: int,
-    token: str,
-    ratingList: List[float],
-    review_text: str | None,
-    db: Session = Depends(get_db),
-):
-
-    user_data = get_current_user(token, db)
-    print(user_data.username)
-    flatten_review_text = review_text.strip()
-    flatten_review_text = None if flatten_review_text == "" else flatten_review_text
-
-    db.execute(
-        update(schema.Review)
-        .where(schema.Review.user_id == user_data.user_id)
-        .where(schema.Review.professor_id == professor_id)
-        .values(
-            cat_1=ratingList[0],
-            cat_2=ratingList[1],
-            cat_3=ratingList[2],
-            cat_4=ratingList[3],
-            review_text=flatten_review_text,
-        )
-    )
-    db.commit()
-    return {"detail": "Success"}
-
-
 def get_allreviews_prof(professor_id: int, db: Session = Depends(get_db)):
     """
     Get all reviews of a Professor
@@ -197,7 +81,166 @@ def generate_final_rating(professor_id: int, db: Session = Depends(get_db)):
             "CAT_4": 0,
         }
 
-    return {"global": final_global_rating, "categories": per_cat_rating}
+    return {"global_rating": final_global_rating, "categories": per_cat_rating}
+
+
+def create_review(
+    professor_id: int,
+    token: str,
+    CAT_1: float,
+    CAT_2: float,
+    CAT_3: float,
+    CAT_4: float,
+    review_text: str = None,
+    db: Session = Depends(get_db),
+):
+    """
+    Create a Review. Get a 422 if UserID<->ProfID pair already exists
+
+    :param professor_id: Description
+    :type professor_id: int
+    :param user_id: Description
+    :type user_id: uuid.UUID
+    :param CAT_1: Description
+    :type CAT_1: float
+    :param CAT_2: Description
+    :type CAT_2: float
+    :param CAT_3: Description
+    :type CAT_3: float
+    :param CAT_4: Description
+    :type CAT_4: float
+    :param review_text: Description
+    :type review_text: str
+    :param db: Description
+    :type db: Session
+    """
+    user_data = get_current_user(token, db)
+    new_review = schema.Review(
+        professor_id=professor_id,
+        user_id=user_data.user_id,
+        created_at=datetime.now(tz=config.TZ),
+        cat_1=CAT_1,
+        cat_2=CAT_2,
+        cat_3=CAT_3,
+        cat_4=CAT_4,
+        review_text=review_text,
+    )
+    db.add(new_review)
+
+    db.commit()
+    reviewdata = generate_final_rating(professor_id, db)
+
+    db.execute(
+        update(schema.Professor)
+        .where(professor_id == schema.Professor.professor_id)
+        .values(
+            global_rating=reviewdata["global_rating"],
+            cat_1=reviewdata["categories"]["CAT_1"],
+            cat_2=reviewdata["categories"]["CAT_2"],
+            cat_3=reviewdata["categories"]["CAT_3"],
+            cat_4=reviewdata["categories"]["CAT_4"],
+        )
+    )
+    db.commit()
+    # db.refresh(new_review)
+    return {"detail": "Success"}
+
+
+def get_review(user_id: uuid.UUID, professor_id: int, db: Session = Depends(get_db)):
+    """
+    Get review of a Professor by a User
+
+    :param user_id: Description
+    :type user_id: uuid.UUID
+    :param professor_id: Description
+    :type professor_id: int
+    :param db: Description
+    :type db: Session
+    """
+    data = db.execute(
+        select(schema.Review)
+        .where(schema.Review.user_id == user_id)
+        .where(schema.Review.professor_id == professor_id)
+    )
+    return data.scalars().first()
+
+
+def delete_review(token: str, professor_id: int, db: Session = Depends(get_db)):
+    """
+    Delete review of a Professor by a User
+
+    :param user_id: Description
+    :type user_id: uuid.UUID
+    :param professor_id: Description
+    :type professor_id: int
+    :param db: Description
+    :type db: Session
+    """
+    user_data = get_current_user(token, db)
+    db.execute(
+        delete(schema.Review)
+        .where(schema.Review.user_id == user_data.user_id)
+        .where(schema.Review.professor_id == professor_id)
+    )
+    db.commit()
+    reviewdata = generate_final_rating(professor_id, db)
+
+    db.execute(
+        update(schema.Professor)
+        .where(professor_id == schema.Professor.professor_id)
+        .values(
+            global_rating=reviewdata["global_rating"],
+            cat_1=reviewdata["categories"]["CAT_1"],
+            cat_2=reviewdata["categories"]["CAT_2"],
+            cat_3=reviewdata["categories"]["CAT_3"],
+            cat_4=reviewdata["categories"]["CAT_4"],
+        )
+    )
+    db.commit()
+    return {"detail": "Success"}
+
+
+def edit_review(
+    professor_id: int,
+    token: str,
+    ratingList: List[float],
+    review_text: str | None,
+    db: Session = Depends(get_db),
+):
+
+    user_data = get_current_user(token, db)
+    print(user_data.username)
+    flatten_review_text = review_text.strip()
+    flatten_review_text = None if flatten_review_text == "" else flatten_review_text
+
+    db.execute(
+        update(schema.Review)
+        .where(schema.Review.user_id == user_data.user_id)
+        .where(schema.Review.professor_id == professor_id)
+        .values(
+            cat_1=ratingList[0],
+            cat_2=ratingList[1],
+            cat_3=ratingList[2],
+            cat_4=ratingList[3],
+            review_text=flatten_review_text,
+        )
+    )
+    db.commit()
+    reviewdata = generate_final_rating(professor_id, db)
+
+    db.execute(
+        update(schema.Professor)
+        .where(professor_id == schema.Professor.professor_id)
+        .values(
+            global_rating=reviewdata["global_rating"],
+            cat_1=reviewdata["categories"]["CAT_1"],
+            cat_2=reviewdata["categories"]["CAT_2"],
+            cat_3=reviewdata["categories"]["CAT_3"],
+            cat_4=reviewdata["categories"]["CAT_4"],
+        )
+    )
+    db.commit()
+    return {"detail": "Success"}
 
 
 def add_reaction(

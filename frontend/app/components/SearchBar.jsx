@@ -27,8 +27,8 @@ function cardMapping(profData, deptData) {
 function handleSearch(profData, value) {
     if (value === "") {
         return profData.sort((a, b) => {
-            const global1 = a.global;
-            const global2 = b.global;
+            const global1 = a.global_rating;
+            const global2 = b.global_rating;
             if (global1 > global2) {
                 return -1;
             }
@@ -46,8 +46,8 @@ function handleSearch(profData, value) {
 function handleRegularSearch(profData, value) {
     if (value === "") {
         return profData.sort((a, b) => {
-            const global1 = a.global;
-            const global2 = b.global;
+            const global1 = a.global_rating;
+            const global2 = b.global_rating;
             if (global1 > global2) {
                 return -1;
             }
@@ -77,7 +77,7 @@ export default function Search({ profData, deptData }) {
 
     return (
         <>
-            <div className="ml-2 mb-3 flex flex-row items-center">
+            <div className="ml-2 mb-3 mt-2 flex flex-row items-center">
                 <TextField
                     isInvalid={!found}
                     className="sm:w-[33%] pr-2"

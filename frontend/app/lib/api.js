@@ -29,7 +29,7 @@ async function getProfessors() {
         await logger(res, data);
         return data;
     } catch (e) {
-        throw new Error("BACKEND DOWN");
+        throw new Error(e.message);
     }
 }
 
@@ -259,9 +259,9 @@ async function deleteReaction(review_id, state) {
 
 async function getUserReactions(profid) {
     const ifAuthenticated = await isAuthenticated();
-    if (ifAuthenticated !== true) {
-        return { success: false, error: "unauthenticated" };
-    }
+    // if (ifAuthenticated !== true) {
+    //     return { success: false, error: "unauthenticated" };
+    // }
 
     try {
         const cookieStore = await cookies();
@@ -275,8 +275,8 @@ async function getUserReactions(profid) {
                 profid: profid,
             }),
         });
-        if (res?.status === 401) {
-            return { success: false, error: "unauthenticated" };
+        if (res?.status === 401 || res?.status === 404) {
+            return [];
         }
 
         const data = await res.json();

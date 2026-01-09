@@ -31,11 +31,6 @@ def get_professor_by_public_id(
 
 def get_all_professors(db: Session = Depends(get_db)) -> List[professors.ProfessorOut]:
     result = db.execute(select(schema.Professor)).scalars().all()
-    for profesor in result:
-        final_rating = generate_final_rating(profesor.professor_id, db)
-        profesor.__dict__["global"] = final_rating["global"]
-        profesor.__dict__["categories"] = final_rating["categories"]
-    print(len(result))
     return result
 
 

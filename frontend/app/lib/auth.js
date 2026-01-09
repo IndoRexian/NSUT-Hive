@@ -25,6 +25,13 @@ async function addCookie(access_token) {
     });
 }
 
+async function deleteCookie() {
+    const cookieStore = await cookies();
+    try {
+        cookieStore.delete("token");
+    } catch {}
+}
+
 async function getAccessToken() {
     const cookieStore = await cookies();
 
@@ -138,6 +145,7 @@ async function isAuthenticated() {
 
 export {
     addCookie,
+    deleteCookie,
     getAccessToken,
     sendOTP,
     verifyOTP,

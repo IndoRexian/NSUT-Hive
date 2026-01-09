@@ -25,8 +25,8 @@ export default function Home() {
 
     return (
         <div
-            className="h-screen w-screen overflow-y-scroll snap-y snap-mandatory
-                scroll-smooth"
+            className="h-screen w-screen overflow-y-scroll snap-y scroll-smooth
+                sm:snap-mandatory"
         >
             {/* ========================================= */}
             {/* SECTION 1: HERO (SVG + Text)              */}
@@ -82,8 +82,9 @@ export default function Home() {
             {/* ========================================= */}
             <div
                 id="info"
-                className="relative h-screen w-screen snap-start flex flex-col
-                    bg-[url(/background_home2.svg)] bg-cover"
+                className="relative sm:h-screen w-screen snap-start flex
+                    flex-col bg-[url(/background_home2.svg)] bg-cover
+                    items-center"
             >
                 <div
                     className="absolute inset-0 pointer-events-none bg-[#1a1a1a]

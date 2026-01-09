@@ -47,7 +47,7 @@ export const getList = (globalRating, size = 64) => {
 
 export default function Reviews({ profReviews, profData, userReactions }) {
     //.log(profReviews);
-    const globalRating = profReviews.global;
+    const globalRating = profReviews.global_rating;
     //console.log(globalRating);
     const starsSystem = getList(globalRating);
     const cat1System = getList(
@@ -103,7 +103,9 @@ export default function Reviews({ profReviews, profData, userReactions }) {
                     </Tooltip>
                     <p>: </p>
                     <p className="pl-2">
-                        {profReviews.global ? profReviews.global : "0.0"}
+                        {profReviews.global_rating
+                            ? profReviews.global_rating
+                            : "0.0"}
                     </p>
                 </h1>
             </div>

@@ -38,6 +38,11 @@ class Professor(Base):
     email: Mapped[str]
     img_link: Mapped[str]
     nsut_link: Mapped[str]
+    cat_1: Mapped[float] = mapped_column(default=0)
+    cat_2: Mapped[float] = mapped_column(default=0)
+    cat_3: Mapped[float] = mapped_column(default=0)
+    cat_4: Mapped[float] = mapped_column(default=0)
+    global_rating: Mapped[float] = mapped_column(default=0)
 
 
 class OTPTOKEN(Base):
