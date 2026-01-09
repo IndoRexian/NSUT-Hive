@@ -36,7 +36,7 @@ app.add_middleware(
 
 @app.exception_handler(OperationalError)
 def db_connection_error_handler(request, exc):
-    return HTTPException(
+    raise HTTPException(
         status_code=503,
         detail="Unable to connect to the database. Please try again later.",
     )
