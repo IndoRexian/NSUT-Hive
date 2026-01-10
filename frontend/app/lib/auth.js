@@ -97,7 +97,7 @@ async function verifyOTPFinal(
 ) {
     let response;
     try {
-        const url = `${API_URL}/login/verify-otp/final`;
+        const url = `${API_URL}/login/verify-otp/final/`;
 
         response = await fetch(url, {
             method: "POST",
@@ -113,7 +113,7 @@ async function verifyOTPFinal(
             }),
         });
     } catch (error) {
-        throw new Error("BACKEND DOWN");
+        throw new Error(error.message);
     }
     const result = await response.json();
     if (!response.ok) {
