@@ -78,8 +78,8 @@ export default function Basic() {
             {/* <Separator orientation="vertical" className="my-8 max-h-max" /> */}
             <div className="w-1/2 relative z-10 animate-slideInFromRight">
                 <div
-                    className="flex flex-col items-center sm:justify-center px-4
-                        min-h-screen"
+                    className="flex flex-col items-center sm:justify-center
+                        md:px-4 min-h-screen"
                     // style={{backgroundImage: `url(${loginBackground})`}}
                 >
                     <Text className="text-3xl mb-2">
@@ -89,6 +89,7 @@ export default function Basic() {
                         <li
                             className="flex gap-1 items-center
                                 hover:text-[#69d364] hover:scale-[1.05]
+                                active:text-[#69d364] active:scale-[1.05]
                                 transition-all ease-in-out"
                         >
                             <Icon icon="streamline:star-2-remix"></Icon>
@@ -97,6 +98,7 @@ export default function Basic() {
                         <li
                             className="flex gap-1 items-center
                                 hover:text-[#69d364] hover:scale-[1.05]
+                                active:text-[#69d364] active:scale-[1.05]
                                 transition-all ease-in-out"
                         >
                             <Icon icon="streamline:star-2-remix"></Icon>
@@ -105,6 +107,7 @@ export default function Basic() {
                         <li
                             className="flex gap-1 items-center
                                 hover:text-[#69d364] hover:scale-[1.05]
+                                active:text-[#69d364] active:scale-[1.05]
                                 transition-all ease-in-out"
                         >
                             <Icon icon="streamline:star-2-remix"></Icon>
@@ -113,6 +116,7 @@ export default function Basic() {
                         <li
                             className="flex gap-1 items-center
                                 hover:text-[#69d364] hover:scale-[1.05]
+                                active:text-[#69d364] active:scale-[1.05]
                                 transition-all ease-in-out"
                         >
                             <Icon icon="streamline:star-2-remix"></Icon>

@@ -26,6 +26,7 @@ function RatingStar({ index, value, onHover, onSelect }) {
         const half = x < rect.width / 2 ? 0.5 : 1;
 
         const newValue = index - 1 + half;
+        console.log(newValue);
         onHover(newValue);
     };
 
@@ -76,6 +77,7 @@ function StarFlex(displayValue, setHover, setRating, setDisabled, index) {
                         if (!next.includes(0)) {
                             setDisabled(false);
                         }
+                        console.log("selected");
                         return next;
                     })
                 }
@@ -168,7 +170,10 @@ export function ReviewModal({
                                     </Modal.Heading>
                                 </Modal.Header>
                                 <Modal.Body className="pt-2 pb-2">
-                                    <div className="stars">
+                                    <Text className="md:hidden">
+                                        Not Optimised for Mobile Devices yet...
+                                    </Text>
+                                    <div className="stars mt-1">
                                         <div
                                             className="flex gap-1 items-center
                                                 pb-0.5 font-telex"

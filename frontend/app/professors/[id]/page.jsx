@@ -9,6 +9,7 @@ import { getReviewsOfProf } from "@/app/lib/api";
 import { Toaster } from "sonner";
 import { cookies } from "next/headers";
 import { getUserReactions } from "@/app/lib/api";
+import placeHolderPFP from "@/public/placeholder_pfp.svg";
 // async function getUserReactions(profid) {
 //     try {
 //         const cookieStore = await cookies(); // Get cookies from the incoming browser request
@@ -39,12 +40,16 @@ export default async function page({ params }) {
         <div className="flex flex-wrap sm:flex-nowrap gap-0 sm:gap-2">
             <div className="flex basis-auto w-full sm:w-1/2 sm:h-[90vh]">
                 <Card
-                    className="mx-auto my-auto bg-[#1F1F1F]
+                    className="md:mx-auto md:my-auto ml-2 mr-2 mt-2 bg-[#1F1F1F]
                         animate-slideInFromLeft"
                 >
                     <Image
                         className="ml-2 justify-content-center"
-                        src={profData.img_link}
+                        src={
+                            profData.img_link
+                                ? profData.img_link
+                                : placeHolderPFP
+                        }
                         height={100}
                         width={300}
                         alt="Image of Professor"

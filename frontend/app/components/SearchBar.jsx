@@ -98,8 +98,8 @@ export default function Search({ profData, deptData }) {
                     placeholder="Search Type"
                     value={search}
                     onChange={(value) => setSearch(value)}
+                    className="pr-2 md:w-fit w-full"
                 >
-                    {" "}
                     <Select.Trigger
                         className="h-10 border-[#3F3F3F] border rounded
                             focus:outline-none focus:ring-2 focus:ring-[#99E910]
@@ -120,9 +120,7 @@ export default function Search({ profData, deptData }) {
                                     hover:scale-[1.05] hover:text-[#99E910]"
                             >
                                 <Tooltip delay={0} closeDelay={0}>
-                                    <Tooltip.Trigger>
-                                        Fuzzy Search
-                                    </Tooltip.Trigger>
+                                    <Tooltip.Trigger>Fuzzy</Tooltip.Trigger>
                                     <Tooltip.Content
                                         showArrow
                                         className="bg-[#2a2a2a] border
@@ -140,6 +138,7 @@ export default function Search({ profData, deptData }) {
                                         </p>
                                     </Tooltip.Content>
                                 </Tooltip>
+
                                 <ListBox.ItemIndicator
                                     className="text-white pl-1"
                                 />
@@ -151,9 +150,7 @@ export default function Search({ profData, deptData }) {
                                     hover:scale-[1.05] hover:text-[#99E910]"
                             >
                                 <Tooltip delay={0} closeDelay={0}>
-                                    <Tooltip.Trigger>
-                                        Regular Search
-                                    </Tooltip.Trigger>
+                                    <Tooltip.Trigger>Regular</Tooltip.Trigger>
                                     <Tooltip.Content
                                         showArrow
                                         className="bg-[#2a2a2a] border

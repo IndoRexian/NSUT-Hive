@@ -546,7 +546,7 @@ function selfComment(
                 >
                     <div
                         className="relative w-full shrink-0 overflow-hidden
-                            rounded-2xl sm:w-fit"
+                            rounded-lg sm:w-fit"
                     >
                         <Image
                             src={placeHolderPFP}

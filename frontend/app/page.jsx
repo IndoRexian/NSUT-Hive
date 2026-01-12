@@ -82,9 +82,8 @@ export default function Home() {
             {/* ========================================= */}
             <div
                 id="info"
-                className="relative sm:h-screen w-screen snap-start flex
-                    flex-col bg-[url(/background_home2.svg)] bg-cover
-                    items-center"
+                className="relative sm:h-screen w-full snap-start flex flex-col
+                    bg-[url(/background_home2.svg)] bg-cover items-center"
             >
                 <div
                     className="absolute inset-0 pointer-events-none bg-[#1a1a1a]
@@ -107,11 +106,11 @@ export default function Home() {
                 </h1>
                 <div
                     className="flex flex-col sm:flex-row justify-center gap-5
-                        my-25 items-stretch"
+                        my-25 sm:items-stretch px-4"
                 >
                     <Card
                         variant="transparent"
-                        className="ring-2 w-sm mr-1 ml-1 sm:mr-0 sm:ml-0
+                        className="ring-2 w-full max-w-sm sm:mr-0 sm:ml-0
                             hover:ring-[#69d364] hover:scale-[1.05]
                             transition-all duration-100 ease-in-out"
                     >
@@ -120,7 +119,7 @@ export default function Home() {
                             className="text-yellow-300 animate-alternateRotate
                                 size-12 justify-center w-full"
                         ></Icon>
-                        <Card.Header className="font-exo2">
+                        <Card.Header className="font-exo2 w-full max-w-sm">
                             <Card.Title className="text-2xl text-center">
                                 Rate Teachers based on their skills
                             </Card.Title>
@@ -134,7 +133,7 @@ export default function Home() {
                     </Card>
                     <Card
                         variant="transparent"
-                        className="ring-2 w-sm mr-1 ml-1 sm:mr-0 sm:ml-0
+                        className="ring-2 w-full max-w-sm sm:mr-0 sm:ml-0
                             hover:ring-[#69d364] hover:scale-[1.05]
                             transition-all duration-100 ease-in-out"
                     >
@@ -156,7 +155,7 @@ export default function Home() {
                     </Card>
                     <Card
                         variant="transparent"
-                        className="ring-2 w-sm mr-1 ml-1 sm:mr-0 sm:ml-0
+                        className="ring-2 w-full max-w-sm sm:mr-0 sm:ml-0
                             hover:ring-[#69d364] hover:scale-[1.05]
                             transition-all duration-100 ease-in-out"
                     >

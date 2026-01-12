@@ -10,15 +10,17 @@ export default function ProfCard({ profData, deptData }) {
     return (
         <Link href={`/professors/${profData.public_id}`}>
             <Card
-                className="w-auto bg-[#1F1F1F] border border-[#2A2A2A]
-                    items-stretch md:flex-row rounded-sm m-2 p-1 cursor-pointer
+                className="bg-[#1F1F1F] border border-[#2A2A2A] items-stretch
+                    md:flex-row rounded-sm m-2 p-1 cursor-pointer
                     transition-transform duration-300 hover:scale-[1.025]
-                    hover:shadow-[0_0_10px_2px_#AFE7A6] animate-slideInFromLeft"
+                    hover:shadow-[0_0_10px_2px_#AFE7A6] animate-slideInFromLeft
+                    text-wrap"
             >
-                <div className="flex flex-row">
+                <div className="flex flex-row grow">
                     <div
-                        className="relative h-35 w-35 shrink-0 overflow-hidden
-                            sm:h-40 sm:w-30 rounded-sm m-1 justify-items-center"
+                        className="relative max-h-60 w-35 shrink-0
+                            overflow-hidden sm:h-40 sm:w-30 rounded-sm m-1
+                            justify-items-center"
                     >
                         <Image
                             src={
@@ -37,17 +39,17 @@ export default function ProfCard({ profData, deptData }) {
                                 h-full w-full scale-125 mx-auto"
                         ></Image>
                     </div>
-                    <div className="flex flex-1 flex-col gap-3 m-1">
+                    <div className="flex flex-1 flex-col gap-3 m-1 min-w-0">
                         <Card.Header className="gap-1">
                             <Card.Title
-                                className="profName pt-1 text-center
-                                    text-[#4bcc4c] font-bold text-xl"
+                                className="profName pt-1 sm:text-center
+                                    text-[#4bcc4c] font-bold sm:text-xl text-lg"
                             >
                                 {profData.name}
                             </Card.Title>
                             <Text
-                                className="basis-full text-right pb-3
-                                    text-[#D2D2D2]"
+                                className="flex-1 sm:text-right pb-3
+                                    text-[#D2D2D2] text-md"
                             >
                                 - {profData.designation}
                             </Text>
@@ -55,13 +57,13 @@ export default function ProfCard({ profData, deptData }) {
                                 <div className="department flex flex-row">
                                     <Text
                                         className="basis-auto font-bold
-                                            font-telex"
+                                            font-telex hidden md:block"
                                     >
                                         Department:{" "}
                                     </Text>
                                     <Text
-                                        className="basis-full ml-1 text-left
-                                            text-[#69d364] font-telex"
+                                        className="flex-1 ml-1 text-left
+                                            text-[#69d364] font-telex text-sm"
                                     >
                                         {
                                             deptData[
@@ -78,7 +80,7 @@ export default function ProfCard({ profData, deptData }) {
                                     items-center"
                             >
                                 {starsSystem.map((element) => element)}
-                                <h1 className="text-white">
+                                <h1 className="text-white hidden md:block">
                                     ({profData.global_rating.toFixed(1)})
                                 </h1>
                             </div>

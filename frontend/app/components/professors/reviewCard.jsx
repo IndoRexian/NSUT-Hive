@@ -124,7 +124,7 @@ export default function ReviewCard({
             <Card className={classname} key={keyS}>
                 <div
                     className="relative w-full shrink-0 overflow-hidden
-                        rounded-2xl sm:w-fit"
+                        rounded-lg sm:w-fit"
                 >
                     <Avatar>
                         <Avatar.Image

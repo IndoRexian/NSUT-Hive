@@ -20,11 +20,11 @@ export default function GlobalError({ error, reset }) {
 
     return (
         <>
-            <div className="w-full h-screen items-center justify-center">
+            <div className="w-full h-screen items-center justify-center p-4">
                 <div className={Four04Font.className}>
                     <h1
                         className="text-center justify-center sm:text-[240px]
-                            text-[120px]"
+                            text-[80px]"
                     >
                         WHAT THE-
                     </h1>
