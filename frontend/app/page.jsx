@@ -47,14 +47,14 @@ export default function Home() {
                 {/* B. The Content Layer (Relative/Flex) */}
                 <div className="z-10 text-center">
                     <div
-                        className={`text-[200px] sm:text-[400px] animate-opacity
+                        className={`text-[150px] sm:text-[350px] animate-opacity
                             leading-none ${rubikFont.className}`}
                     >
-                        NSH
+                        NSUT Hive
                     </div>
 
                     <div className="text-xl sm:text-3xl font-chivo indent-30">
-                        One Stop location for all things NSUT
+                        - One Stop location for all things NSUT
                     </div>
 
                     <div className="my-10">
@@ -82,8 +82,9 @@ export default function Home() {
             {/* ========================================= */}
             <div
                 id="info"
-                className="relative sm:h-screen w-full snap-start flex flex-col
-                    bg-[url(/background_home2.svg)] bg-cover items-center"
+                className="relative sm:h-screen w-full snap-start snap-proximity
+                    flex flex-col bg-[url(/background_home2.svg)] bg-cover
+                    items-center"
             >
                 <div
                     className="absolute inset-0 pointer-events-none bg-[#1a1a1a]
@@ -123,7 +124,9 @@ export default function Home() {
                             <Card.Title className="text-2xl text-center">
                                 Rate Teachers based on their skills
                             </Card.Title>
-                            <Card.Description className="text-lg m-2">
+                            <Card.Description
+                                className="text-lg m-2 text-[#D2D2D2]"
+                            >
                                 Access professors based on four distinct
                                 factors, designed to capture how students
                                 actually experience a class — from teaching
@@ -146,7 +149,9 @@ export default function Home() {
                             <Card.Title className="text-2xl text-center">
                                 Read Reviews from Other Students
                             </Card.Title>
-                            <Card.Description className="text-lg m-2">
+                            <Card.Description
+                                className="text-lg m-2 text-[#D2D2D2]"
+                            >
                                 Read, share, and react to reviews from other
                                 students — with moderation in place to keep
                                 things fair and useful.
@@ -168,7 +173,9 @@ export default function Home() {
                             <Card.Title className="text-2xl text-center">
                                 Be Completely anonymous
                             </Card.Title>
-                            <Card.Description className="text-lg m-2">
+                            <Card.Description
+                                className="text-lg m-2 text-[#D2D2D2]"
+                            >
                                 YES! We dont store any information of users
                                 other than their emails, so none of their
                                 actions can be backtracked. Even our usernames
@@ -182,7 +189,7 @@ export default function Home() {
                 >
                     So What are you waiting for?
                 </h1>
-                <div className="flex w-full justify-center flex-row mt-2">
+                <div className="flex w-full justify-center flex-row mt-2 my-10">
                     <Button
                         variant="ghost"
                         className="focus:bg-[#1a1a1a] hover:bg-[#1a1a1a]

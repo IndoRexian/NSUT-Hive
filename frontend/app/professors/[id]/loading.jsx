@@ -1,5 +1,5 @@
 import Image from "next/image";
-import NSHLogo from "@/public/NSH_NOBG.svg";
+import NHLogo from "@/public/NH_NOBG.svg";
 export default function Loading() {
     return (
         <div
@@ -14,7 +14,7 @@ export default function Loading() {
                     fill="true"
                 ></Icon> */}
                 <Image
-                    src={NSHLogo}
+                    src={NHLogo}
                     alt="LOADING"
                     className="bg-cover justify-content-center items-center
                         text-center size-100 animate-caret-blink"

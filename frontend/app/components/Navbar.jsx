@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import NSH_NOBG_256 from "../../public/NSH_NOBG_256.png";
+import NH_NOBG_256 from "../../public/NH_NOBG_256.png";
 import { UserDataContext } from "../context/context";
 import { useContext, useState } from "react";
 import { Avatar, Button, Dropdown, Separator } from "@heroui/react";
@@ -79,8 +79,8 @@ export default function Navbar() {
                                 className="w-12 h-12 hover:scale-[1.05]
                                     active:scale-[1.05] transition-all
                                     ease-in-out 100ms"
-                                src={NSH_NOBG_256}
-                                alt="NSH Logo"
+                                src={NH_NOBG_256}
+                                alt="NH Logo"
                             ></Image>
                         </Link>
                     </div>

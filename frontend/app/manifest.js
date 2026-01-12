@@ -1,7 +1,7 @@
 export default function manifest() {
     return {
-        name: "NSUT Students Hub",
-        short_name: "NSH",
+        name: "NSUT Hive",
+        short_name: "NH",
         description: "One Stop location for all things NSUT",
         start_url: "/",
         display: "standalone",
@@ -9,7 +9,7 @@ export default function manifest() {
         theme_color: "#1ac531",
         icons: [
             {
-                src: "/NSH.ico",
+                src: "/NH.ico",
                 sizes: "any",
                 type: "image/x-icon",
             },
