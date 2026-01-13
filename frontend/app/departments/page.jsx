@@ -4,7 +4,19 @@ export const metadata = {
     title: "NSUT Hive — View All Departments",
     description: `Explore academic departments at NSUT and view student-submitted insights and professor reviews organized by department.`,
     openGraph: {
-        images: "https://cdn.nsuthive.com/NH_NOBG_1024.png",
+        title: "NSUT Hive — View All Departments",
+        description: `Explore academic departments at NSUT and view student-submitted insights and professor reviews organized by department.`,
+        images: [
+            {
+                url: profData.img_link
+                    ? `https://cdn.nsuthive.com/professors/${profData.professor_id}.png`
+                    : `https://nsuthive.com/placeholder_pfp.svg`,
+                height: 100,
+                width: 300,
+                alt: `Image of ${profData.name}`,
+            },
+        ],
+        type: "website",
     },
 };
 export default function Departments() {

@@ -34,7 +34,32 @@ export async function generateMetadata({ params }) {
         description: `Read anonymous student reviews and academic insights about 
         Professor ${profData.name} at NSUT, covering teaching effectiveness, grading fairness, attendance policy, and ease of workload.`,
         openGraph: {
-            images: `https://cdn.nsuthive.com/professors/${profData.professor_id}.png`,
+            title: `NSUT Hive — ${profData.name}`,
+            description: `Read anonymous student reviews and academic insights about 
+        Professor ${profData.name} at NSUT, covering teaching effectiveness, grading fairness, attendance policy, and ease of workload.`,
+            images: [
+                {
+                    url: profData.img_link
+                        ? `https://cdn.nsuthive.com/professors/${profData.professor_id}.png`
+                        : `https://nsuthive.com/placeholder_pfp.svg`,
+                    height: 100,
+                    width: 300,
+                    alt: `Image of ${profData.name}`,
+                },
+            ],
+            type: "website",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `NSUT Hive — ${profData.name}`,
+            description: `Read anonymous student reviews and academic insights about 
+            Professor ${profData.name} at NSUT, covering teaching effectiveness, grading fairness, attendance policy, and ease of workload.`,
+
+            images: [
+                profData.img_link
+                    ? `https://cdn.nsuthive.com/professors/${profData.professor_id}.png`
+                    : `https://nsuthive.com/placeholder_pfp.svg`,
+            ],
         },
     };
 }
