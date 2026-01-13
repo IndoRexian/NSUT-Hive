@@ -1,4 +1,5 @@
-import { Geist, Geist_Mono, Exo_2, Chivo, Telex } from "next/font/google";
+import { Exo_2, Chivo, Telex } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import { getUserData } from "./lib/api";
 import Navbar from "./components/Navbar";
@@ -40,6 +41,7 @@ export default async function RootLayout({ children }) {
     //console.log(data);
     return (
         <html lang="en" suppressHydrationWarning>
+            <GoogleTagManager gtmId="G-DVP8XJKB00" />
             <head>
                 <link rel="icon" href="/NH.ico" sizes="any" />
                 <meta property="og:image" content="<generated>" />
