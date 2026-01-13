@@ -41,6 +41,3 @@ def db_connection_error_handler(request, exc):
         status_code=503,
         detail="Unable to connect to the database. Please try again later.",
     )
-
-
-print(config.db_url)

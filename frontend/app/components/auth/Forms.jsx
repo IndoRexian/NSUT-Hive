@@ -163,7 +163,7 @@ export function OtpForm({
             onSubmit={onSubmit}
         >
             <div className="justify-content-start">
-                <Label>OTP Sent</Label>
+                <Label>OTP Sent (Check Your Spam Inbox too)</Label>
                 <InputOTP
                     maxLength={6}
                     pattern={REGEXP_ONLY_DIGITS}

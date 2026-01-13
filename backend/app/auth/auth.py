@@ -19,9 +19,14 @@ from zoneinfo import ZoneInfo
 import pyotp
 from core.config import config
 
+with open("./data/otp.html", "r", encoding="utf-8") as fp:
+    htmldata = fp.read()
+
 
 def signin_request(email: str, otp: str):
+
     context = ssl.create_default_context()
+
     with SMTP("smtp-relay.brevo.com", 587) as server:
         server.starttls(context=context)
         key = config.SMTP_KEY
@@ -30,12 +35,15 @@ def signin_request(email: str, otp: str):
             key,
         )
         msg = EmailMessage()
-        msg["From"] = "indo.rexian@gmail.com"
+        msg["From"] = "NSUT Hive <noreply@nsuthive.com>"
+        msg["X-Mailer"] = "NSUT Hive"
         msg["To"] = email
-        msg["Subject"] = "Login To NSH"
+        msg["Subject"] = "Login To NSUT Hive"
         created_at = datetime.datetime.now(tz=ZoneInfo("Asia/Kolkata"))
         expires_at = created_at + datetime.timedelta(minutes=10)
-        msg.set_content(otp)
+        msg.set_content(
+            htmldata.replace("{{otp}}", otp).replace("{{email}}", email), subtype="html"
+        )
         try:
             server.send_message(msg)
             return True
