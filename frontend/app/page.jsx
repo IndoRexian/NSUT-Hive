@@ -4,7 +4,8 @@ import SvgBG from "./components/home/SvgBG";
 import SvgBGReverse from "./components/home/SvgBGReverse";
 import { useRouter } from "next/navigation";
 import { Anton } from "next/font/google";
-import { useState, useEffect } from "react";
+import { UserDataContext } from "./context/context";
+import { useState, useEffect, useContext } from "react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 const rubikFont = Anton({
@@ -13,6 +14,7 @@ const rubikFont = Anton({
     display: "swap",
 });
 export default function Home() {
+    const userDataC = useContext(UserDataContext);
     const [reverse, setReverse] = useState(false);
     const router = useRouter();
     useEffect(() => {
@@ -184,28 +186,39 @@ export default function Home() {
                         </Card.Header>
                     </Card>
                 </div>
-                <h1
-                    className={`text-center text-2xl ${rubikFont.className} z-1`}
-                >
-                    So What are you waiting for?
-                </h1>
-                <div className="flex w-full justify-center flex-row mt-2 my-10">
-                    <Button
-                        variant="ghost"
-                        className="focus:bg-[#1a1a1a] hover:bg-[#1a1a1a]
-                            hover:ring-[#69d364] not-hover:bg-[#1a1a1a]
-                            active:ring-[#69d364] z-0 focus:ring-[#69d364] ring
-                            ring-[#1a1a1a] font-exo2 text-white gap-0.5 text-lg
-                            transition-all duration-100 ease-in-out"
-                        onPress={() => router.push("/login")}
-                    >
-                        Login Now
-                        <Icon
-                            icon="lsicon:double-arrow-right-outline"
-                            className="text-white size-10"
-                        ></Icon>
-                    </Button>
-                </div>
+                {userDataC.data ? (
+                    <></>
+                ) : (
+                    <>
+                        <h1
+                            className={`text-center text-2xl
+                                ${rubikFont.className} z-1 `}
+                        >
+                            So What are you waiting for?
+                        </h1>
+                        <div
+                            className="flex w-full justify-center flex-row mt-2
+                                my-10"
+                        >
+                            <Button
+                                variant="ghost"
+                                className="focus:bg-[#1a1a1a] hover:bg-[#1a1a1a]
+                                    hover:ring-[#69d364] not-hover:bg-[#1a1a1a]
+                                    active:ring-[#69d364] z-0
+                                    focus:ring-[#69d364] ring ring-[#1a1a1a]
+                                    font-exo2 text-white gap-0.5 text-lg
+                                    transition-all duration-100 ease-in-out"
+                                onPress={() => router.push("/login")}
+                            >
+                                Login Now
+                                <Icon
+                                    icon="lsicon:double-arrow-right-outline"
+                                    className="text-white size-10"
+                                ></Icon>
+                            </Button>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );
