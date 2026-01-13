@@ -42,4 +42,4 @@ def db_connection_error_handler(request, exc):
     )
 
 
-print("Running at port 8000")
+print(config.db_url)
