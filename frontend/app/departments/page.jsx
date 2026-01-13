@@ -1,6 +1,12 @@
 import { Icon } from "@iconify/react";
 import React from "react";
-
+export const metadata = {
+    title: "NSUT Hive — View All Departments",
+    description: `Explore academic departments at NSUT and view student-submitted insights and professor reviews organized by department.`,
+    openGraph: {
+        images: "https://cdn.nsuthive.com/NH_NOBG_1024.png",
+    },
+};
 export default function Departments() {
     return (
         <div className="flex justify-center items-center h-screen w-screen">

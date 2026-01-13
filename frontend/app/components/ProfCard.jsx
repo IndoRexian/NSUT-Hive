@@ -25,7 +25,7 @@ export default function ProfCard({ profData, deptData }) {
                         <Image
                             src={
                                 profData.img_link
-                                    ? profData.img_link
+                                    ? `https://cdn.nsuthive.com/professors/${profData.professor_id}.png`
                                     : placeHolderPFP
                             }
                             width={250}

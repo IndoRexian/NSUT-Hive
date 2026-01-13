@@ -25,8 +25,13 @@ const telex = Telex({
 });
 
 export const metadata = {
-    title: "NSUT Hive",
-    description: "One Stop location for all things NSUT.",
+    title: "NSUT Hive — One Stop location for all things NSUT",
+    description: `NSUT Hive is a student-run platform for sharing honest, 
+        anonymous insights about professors and academics at NSUT — 
+        helping students make better-informed decisions.`,
+    openGraph: {
+        images: "https://cdn.nsuthive.com/NH_NOBG_1024.png",
+    },
 };
 
 export default async function RootLayout({ children }) {

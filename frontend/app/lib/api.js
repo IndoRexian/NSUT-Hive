@@ -1,4 +1,5 @@
 "use server";
+import { cache } from "react";
 import { isAuthenticated } from "./auth";
 import * as Sentry from "@sentry/nextjs";
 import { cookies } from "next/headers";
@@ -22,7 +23,7 @@ async function logger(res, data) {
     }
 }
 
-async function getProfessors() {
+const getProfessors = cache(async () => {
     try {
         const res = await fetch(`${API_URL}/professors/`);
         const data = await res.json();
@@ -31,7 +32,7 @@ async function getProfessors() {
     } catch (e) {
         throw new Error(e.message);
     }
-}
+});
 
 async function getDepartments() {
     try {
