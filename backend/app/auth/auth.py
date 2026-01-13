@@ -25,26 +25,27 @@ with open("./data/otp.html", "r", encoding="utf-8") as fp:
 
 def signin_request(email: str, otp: str):
 
-    context = ssl.create_default_context()
-
     with SMTP("smtp-relay.brevo.com", 587) as server:
-        server.starttls(context=context)
-        key = config.SMTP_KEY
-        server.login(
-            "indo.rexian@gmail.com",
-            key,
-        )
-        msg = EmailMessage()
-        msg["From"] = "NSUT Hive <noreply@nsuthive.com>"
-        msg["X-Mailer"] = "NSUT Hive"
-        msg["To"] = email
-        msg["Subject"] = "Login To NSUT Hive"
-        created_at = datetime.datetime.now(tz=ZoneInfo("Asia/Kolkata"))
-        expires_at = created_at + datetime.timedelta(minutes=10)
-        msg.set_content(
-            htmldata.replace("{{otp}}", otp).replace("{{email}}", email), subtype="html"
-        )
         try:
+            context = ssl.create_default_context()
+            server.starttls(context=context)
+            key = config.SMTP_KEY
+            server.login(
+                "indo.rexian@gmail.com",
+                key,
+            )
+            msg = EmailMessage()
+            msg["From"] = "NSUT Hive <noreply@nsuthive.com>"
+            msg["X-Mailer"] = "NSUT Hive"
+            msg["To"] = email
+            msg["Subject"] = "Login To NSUT Hive"
+            created_at = datetime.datetime.now(tz=ZoneInfo("Asia/Kolkata"))
+            expires_at = created_at + datetime.timedelta(minutes=10)
+            msg.set_content(
+                htmldata.replace("{{otp}}", otp).replace("{{email}}", email),
+                subtype="html",
+            )
+
             server.send_message(msg)
             return True
         except Exception as e:
