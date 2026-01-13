@@ -47,7 +47,8 @@ def signin_request(email: str, otp: str):
         try:
             server.send_message(msg)
             return True
-        except:
+        except Exception as e:
+            print(f"Sending Email Failed: {e}")
             return False
 
 
