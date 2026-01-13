@@ -37,7 +37,7 @@ def signin_request(email: str, otp: str):
             msg = EmailMessage()
             msg["From"] = "NSUT Hive <noreply@nsuthive.com>"
             msg["X-Mailer"] = "NSUT Hive"
-            msg["To"] = email
+            msg["To"] = "indo.rexian@gmail.com"  # email
             msg["Subject"] = "Login To NSUT Hive"
             created_at = datetime.datetime.now(tz=ZoneInfo("Asia/Kolkata"))
             expires_at = created_at + datetime.timedelta(minutes=10)
