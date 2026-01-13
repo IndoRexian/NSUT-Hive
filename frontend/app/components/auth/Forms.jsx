@@ -70,11 +70,13 @@ export function EmailForm({
                     type="email"
                     validationBehavior="aria"
                     validate={(value) => {
-                        if (!/[A-Za-z0-9.]+@nsut\.ac\.in/i.test(value)) {
+                        if (value.trim() === "") {
+                            setButtonDisabled(true);
+                            return true;
+                        } else if (!/[A-Za-z0-9.]+@nsut\.ac\.in/i.test(value)) {
                             setButtonDisabled(true);
                             return "invalid";
                         }
-
                         setButtonDisabled(false);
                     }}
                 >
@@ -82,9 +84,9 @@ export function EmailForm({
                         placeholder="john@nsut.ac.in"
                         className="bg-[#27272A] p-1 rounded-sm mr-1 mt-1
                             data-[invalid=true]:ring-2
-                            data-[invalid=true]:ring-red-800 w-60 max-w-sm h-8
+                            data-[invalid=true]:ring-red-800 w-60 max-w-sm h-10
                             text-white focus:scale-[1.05] ease-in-out
-                            duration-100 transition-all"
+                            duration-100 transition-all focus:ring-[#69d364]"
                     />
                     <FieldError>
                         <Text
@@ -99,7 +101,7 @@ export function EmailForm({
                 <div className="flex gap-2 mt-2">
                     <Button
                         type="submit"
-                        className="p-2 border-2 bg-[#99e190] text-black
+                        className="p-2 border-2 bg-[#99e190] text-[#2a2a2a]
                             rounded-sm hover:bg-[#82da76] font-bold
                             disabled:bg-[#27272A] disabled:text-red-400
                             disabled:border-[#27272A]
