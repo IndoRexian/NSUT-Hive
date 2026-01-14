@@ -1,5 +1,5 @@
 import { Exo_2, Chivo, Telex } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import { getUserData } from "./lib/api";
 import Navbar from "./components/Navbar";
@@ -41,7 +41,7 @@ export default async function RootLayout({ children }) {
     //console.log(data);
     return (
         <html lang="en" suppressHydrationWarning>
-            <GoogleAnalytics gaId="G-DVP8XJKB00"></GoogleAnalytics>
+            <GoogleTagManager gtmId="GTM-W9HGMFDN" />
             <head>
                 <link rel="icon" href="/favicon.ico" sizes="any" />
             </head>
