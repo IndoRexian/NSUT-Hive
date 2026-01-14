@@ -6,26 +6,7 @@ import React from "react";
 
 import { getUserReactions } from "@/app/lib/api";
 import placeHolderPFP from "@/public/placeholder_pfp.svg";
-// async function getUserReactions(profid) {
-//     try {
-//         const cookieStore = await cookies(); // Get cookies from the incoming browser request
-//         API_URL = process.env.API_URL;
-//         const res = await fetch(`${API_URL}/review/reaction/getuser/`, {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 Cookie: cookieStore.toString(), // <--- CRITICAL: Manually forward the cookie
-//             },
-//             body: JSON.stringify({ profid }),
-//             cache: "no-store", // Ensure fresh data on every request
-//         });
 
-//         if (!res.ok) return null;
-//         return res.json();
-//     } catch (e) {
-//         throw new Error("BACKEND DOWN");
-//     }
-// }
 export async function generateMetadata({ params }) {
     const { id } = await params;
     const profData = await getProfessorByPublicID(id);
@@ -41,9 +22,9 @@ export async function generateMetadata({ params }) {
                 {
                     url: profData.img_link
                         ? `https://cdn.nsuthive.com/professors/${profData.professor_id}.png`
-                        : `https://nsuthive.com/placeholder_pfp.svg`,
-                    height: 100,
-                    width: 300,
+                        : `https://nsuthive.com/placeholder_pfp.png`,
+                    height: 300,
+                    width: 100,
                     alt: `Image of ${profData.name}`,
                 },
             ],
@@ -58,7 +39,7 @@ export async function generateMetadata({ params }) {
             images: [
                 profData.img_link
                     ? `https://cdn.nsuthive.com/professors/${profData.professor_id}.png`
-                    : `https://nsuthive.com/placeholder_pfp.svg`,
+                    : `https://nsuthive.com/placeholder_pfp.png`,
             ],
         },
     };
