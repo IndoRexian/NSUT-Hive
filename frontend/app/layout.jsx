@@ -7,7 +7,7 @@ import UserProvider from "./components/UserProvider";
 import { Toaster } from "sonner";
 import { isAuthenticated } from "./lib/auth";
 import * as Sentry from "@sentry/nextjs";
-
+import Script from "next/script";
 const exo2 = Exo_2({
     weight: "400",
     variable: "--font-exo2",
@@ -41,6 +41,11 @@ export default async function RootLayout({ children }) {
     //console.log(data);
     return (
         <html lang="en" suppressHydrationWarning>
+            <Script
+                async
+                src="https://www.googletagmanager.com/gtag/js?id=G-DVP8XJKB00"
+            ></Script>
+
             <GoogleTagManager gtmId="G-DVP8XJKB00" />
             <head>
                 <link rel="icon" href="/favicon.ico" sizes="any" />
