@@ -143,6 +143,17 @@ async function isAuthenticated() {
     }
 }
 
+async function getBetaUsers() {
+    return await fetch("https://api.jsonbin.io/v3/b/69692ca1d0ea881f406e3a56", {
+        headers: {
+            "X-Access-Key":
+                "$2a$10$89Fqk5vrgjuBHLFeMDKAK.U/oSPN43PGf4Wtqlq6V6IQxGCZ.xnFW",
+        },
+    }).then((response) => {
+        const userdata = response.json();
+        return userdata;
+    });
+}
 export {
     addCookie,
     deleteCookie,
@@ -151,4 +162,5 @@ export {
     verifyOTP,
     verifyOTPFinal,
     isAuthenticated,
+    getBetaUsers,
 };

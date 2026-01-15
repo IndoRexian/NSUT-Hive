@@ -1,4 +1,9 @@
-import { sendOTP, verifyOTP, verifyOTPFinal } from "@/app/lib/auth";
+import {
+    getBetaUsers,
+    sendOTP,
+    verifyOTP,
+    verifyOTPFinal,
+} from "@/app/lib/auth";
 import { generateAvatar, generateUsername } from "@/app/lib/userdata";
 import {
     Avatar,
@@ -18,7 +23,7 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
-import { errorToast } from "@/app/lib/toasts";
+import { errorToast, infoToast } from "@/app/lib/toasts";
 
 export function EmailForm({
     setButtonDisabled,
@@ -40,17 +45,26 @@ export function EmailForm({
         formData.forEach((value, key) => {
             data[key] = value.toString();
         });
-        try {
-            const res = await sendOTP(data.email);
-            if (res !== "Success") {
-                setError(res);
-            } else {
-                setError("");
-                setEmail(data.email);
-                setOtpTime(true);
+
+        const beta_users = await getBetaUsers();
+        console.log(beta_users);
+        if (!beta_users["record"]["users"].includes(data.email)) {
+            infoToast(
+                "Not a Beta Member! Stay Tuned for the official release here: https://discord.gg/vCQEj2WzZR",
+            );
+        } else {
+            try {
+                const res = await sendOTP(data.email);
+                if (res !== "Success") {
+                    setError(res);
+                } else {
+                    setError("");
+                    setEmail(data.email);
+                    setOtpTime(true);
+                }
+            } catch (e) {
+                errorToast(e.message);
             }
-        } catch (e) {
-            errorToast(e.message);
         }
 
         setLoading(false);
