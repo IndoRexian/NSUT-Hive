@@ -23,7 +23,7 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
-import { errorToast, infoToast } from "@/app/lib/toasts";
+import { errorToast } from "@/app/lib/toasts";
 
 export function EmailForm({
     setButtonDisabled,
@@ -46,25 +46,17 @@ export function EmailForm({
             data[key] = value.toString();
         });
 
-        const beta_users = await getBetaUsers();
-        console.log(beta_users);
-        if (!beta_users["record"]["users"].includes(data.email)) {
-            infoToast(
-                "Not a Beta Member! Stay Tuned for the official release here: https://discord.gg/vCQEj2WzZR",
-            );
-        } else {
-            try {
-                const res = await sendOTP(data.email);
-                if (res !== "Success") {
-                    setError(res);
-                } else {
-                    setError("");
-                    setEmail(data.email);
-                    setOtpTime(true);
-                }
-            } catch (e) {
-                errorToast(e.message);
+        try {
+            const res = await sendOTP(data.email);
+            if (res !== "Success") {
+                setError(res);
+            } else {
+                setError("");
+                setEmail(data.email);
+                setOtpTime(true);
             }
+        } catch (e) {
+            errorToast(e.message);
         }
 
         setLoading(false);
