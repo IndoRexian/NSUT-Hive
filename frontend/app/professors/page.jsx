@@ -11,7 +11,7 @@ export const metadata = {
     based on teaching effectiveness, grading fairness, attendance policy, and ease of workload.`,
         images: [
             {
-                url: "https://cdn.nsuthive.com/NH_NOBG_1024.png",
+                url: "https://" + process.env.CDN_LINK + "/NH_NOBG_1024.png",
                 height: 512,
                 width: 512,
                 alt: "Logo of NSUT Hive",
@@ -25,8 +25,6 @@ export default async function Professors() {
     const profData = await getProfessors();
     const deptData = await getDepartments();
 
-    //console.log(deptData);
-    //console.log(profData);
     return (
         <>
             <Search profData={profData} deptData={deptData}></Search>

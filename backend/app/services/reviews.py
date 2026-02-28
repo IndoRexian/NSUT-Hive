@@ -1,6 +1,5 @@
 import uuid
-from datetime import datetime, timedelta
-from re import M
+from datetime import datetime
 from typing import List, TypedDict
 
 from core.config import config
@@ -9,7 +8,7 @@ from database import get_db
 from db import schema
 from fastapi import Depends
 from services.users import get_current_user
-from sqlalchemy import case, delete, exc, select, update
+from sqlalchemy import case, delete, select, update
 from sqlalchemy.orm import Session
 
 
@@ -17,9 +16,9 @@ def get_allreviews_prof(professor_id: int, db: Session = Depends(get_db)):
     """
     Get all reviews of a Professor
 
-    :param professor_id: Description
+    :param professor_id: The Primary key professor ID, Not the Public ID.
     :type professor_id: int
-    :param db: Description
+    :param db: Database session
     :type db: Session
     """
     data = db.execute(
@@ -28,18 +27,16 @@ def get_allreviews_prof(professor_id: int, db: Session = Depends(get_db)):
         .where(schema.Review.professor_id == professor_id)
     )
     rows = data.mappings().all()
-    # result = [data_dict.keys() for data_dict in rows]
-    # print(_flattendata(rows))
     return _flatten_reviews_data(rows)
 
 
 def get_cat_prof(professor_id: int, db: Session = Depends(get_db)):
     """
-    Get all reviews of a Professor
+    Get all ratings of a Professor
 
-    :param professor_id: Description
+    :param professor_id: The Primary key professor ID, Not the Public ID.
     :type professor_id: int
-    :param db: Description
+    :param db: Database session
     :type db: Session
     """
     data = db.execute(
@@ -97,21 +94,21 @@ def create_review(
     """
     Create a Review. Get a 422 if UserID<->ProfID pair already exists
 
-    :param professor_id: Description
+    :param professor_id: The Primary key professor ID
     :type professor_id: int
-    :param user_id: Description
+    :param user_id: User ID
     :type user_id: uuid.UUID
-    :param CAT_1: Description
+    :param CAT_1: Teaching Effectiveness
     :type CAT_1: float
-    :param CAT_2: Description
+    :param CAT_2: Grading
     :type CAT_2: float
-    :param CAT_3: Description
+    :param CAT_3: Attendence Policy
     :type CAT_3: float
-    :param CAT_4: Description
+    :param CAT_4: Ease of Workload
     :type CAT_4: float
-    :param review_text: Description
+    :param review_text: Review given by user
     :type review_text: str
-    :param db: Description
+    :param db: Database session
     :type db: Session
     """
     user_data = get_current_user(token, db)
@@ -150,11 +147,11 @@ def get_review(user_id: uuid.UUID, professor_id: int, db: Session = Depends(get_
     """
     Get review of a Professor by a User
 
-    :param user_id: Description
+    :param user_id: User ID
     :type user_id: uuid.UUID
-    :param professor_id: Description
+    :param professor_id: The Primary key professor ID, Not the Public ID.
     :type professor_id: int
-    :param db: Description
+    :param db: Database session
     :type db: Session
     """
     data = db.execute(
@@ -169,11 +166,11 @@ def delete_review(token: str, professor_id: int, db: Session = Depends(get_db)):
     """
     Delete review of a Professor by a User
 
-    :param user_id: Description
+    :param user_id: User ID
     :type user_id: uuid.UUID
-    :param professor_id: Description
+    :param professor_id: The Primary key professor ID, Not the Public ID.
     :type professor_id: int
-    :param db: Description
+    :param db: Database session
     :type db: Session
     """
     user_data = get_current_user(token, db)
@@ -207,9 +204,18 @@ def edit_review(
     review_text: str | None,
     db: Session = Depends(get_db),
 ):
+    """Edit a Review
+
+    Args:
+        professor_id (int): The Primary key professor ID, Not the Public ID.
+        token (str): Token
+        ratingList (List[float]): The list of category ratings
+        review_text (str | None): The review text given by the user
+        db (Session): Database session
+    """
 
     user_data = get_current_user(token, db)
-    print(user_data.username)
+
     flatten_review_text = review_text.strip()
     flatten_review_text = None if flatten_review_text == "" else flatten_review_text
 
@@ -249,6 +255,20 @@ def add_reaction(
     state: int,
     db: Session = Depends(get_db),
 ):
+    """Add reaction to a review
+
+    Parameters
+    ----------
+    review_id : int
+        The review DB ID
+    token : str
+        User Token
+    state : int
+        Like/Dislike
+    db : Session
+        Database session
+    """
+
     user_data = get_current_user(token, db)
     new_reaction = schema.Reaction(
         user_id=user_data.user_id,
@@ -258,14 +278,14 @@ def add_reaction(
     )
     db.add(new_reaction)
     if state == 1:
-        print("liking")
+
         db.execute(
             update(schema.Review)
             .where(schema.Review.review_id == review_id)
             .values(likes=schema.Review.likes + 1)
         )
     else:
-        print("dislking")
+
         db.execute(
             update(schema.Review)
             .where(schema.Review.review_id == review_id)
@@ -278,6 +298,20 @@ def add_reaction(
 def delete_reaction(
     review_id: int, token: str, state: 0 | 1, db: Session = Depends(get_db)
 ):
+    """Deletes a reaction
+
+    Parameters
+    ----------
+    review_id : int
+        The review DB ID
+    token : str
+        User Token
+    state : 0 | 1
+        Like/Dislike
+    db : Session
+        Database session
+    """
+
     user_data = get_current_user(token, db)
     db.execute(
         delete(schema.Reaction)
@@ -311,6 +345,18 @@ def delete_reaction(
 
 
 def get_user_reactions(token: str, professor_id: int, db: Session = Depends(get_db)):
+    """Get User reactions for a review
+
+    Parameters
+    ----------
+    token : str
+        User Token
+    professor_id : int
+        The Primary key professor ID, Not the Public ID.
+    db : Session
+        Database session
+    """
+
     user_data = get_current_user(token, db)
     data = db.execute(
         select(schema.Review, schema.Reaction)

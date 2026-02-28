@@ -30,11 +30,10 @@ def create_access_token(subject: str | int, expires_delta: timedelta) -> str:
 
 def get_userid(token: str) -> str | None:
     try:
-        print(token)
-        # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjY1NjExMzQsInN1YiI6IjUwZmZjMmFkLTlmZDYtNGUyOC1iNDM2LTg3YmIzYTBhOTQzYSJ9.aP4HNnCuNqnie5Wwb_g0ocu_dTVB6JxYKbdharxRI50
+
         decoded_jwt = jwt.decode(token, config.APP_SECRET_KEY, ["HS256"])
-        print(decoded_jwt)
+
         return decoded_jwt["sub"]
     except Exception as e:
-        print(e)
+
         return None

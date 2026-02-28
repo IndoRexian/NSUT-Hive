@@ -1,17 +1,5 @@
-"""from auth0.authentication import Passwordless
-from app.core import config
-
-passwordless=Passwordless(
-    domain=config.AUTH0_DOMAIN,
-    client_id=config.AUTH0_CLIENT_ID,
-    client_secret=config.AUTH0_CLIENT_SECRET,
-)
-
-passwordless.email('dheeraj26singh@gmail.com', 'code')"""
-
 import datetime
 import ssl
-import time
 from email.message import EmailMessage
 from smtplib import SMTP
 from zoneinfo import ZoneInfo
@@ -29,9 +17,10 @@ def signin_request(email: str, otp: str):
         try:
             context = ssl.create_default_context()
             server.starttls(context=context)
+            smtp_email = config.SMTP_EMAIL
             key = config.SMTP_KEY
             server.login(
-                "indo.rexian@gmail.com",
+                smtp_email,
                 key,
             )
             msg = EmailMessage()
@@ -39,8 +28,8 @@ def signin_request(email: str, otp: str):
             msg["X-Mailer"] = "NSUT Hive"
             msg["To"] = email
             msg["Subject"] = "Login To NSUT Hive"
-            created_at = datetime.datetime.now(tz=ZoneInfo("Asia/Kolkata"))
-            expires_at = created_at + datetime.timedelta(minutes=10)
+            # created_at = datetime.datetime.now(tz=ZoneInfo("Asia/Kolkata"))
+            # expires_at = created_at + datetime.timedelta(minutes=10)
             msg.set_content(
                 htmldata.replace("{{otp}}", otp).replace("{{email}}", email),
                 subtype="html",
@@ -49,17 +38,5 @@ def signin_request(email: str, otp: str):
             server.send_message(msg)
             return True
         except Exception as e:
-            print(f"Sending Email Failed: {e}")
+            # (f"Sending Email Failed: {e}")
             return False
-
-
-"""def verify_otp(otp: str, email: str):
-    response = supabase.auth.verify_otp(
-        {
-            "email": email,
-            "token": otp,
-            "type": "email",
-        }
-    )
-    return response
-"""

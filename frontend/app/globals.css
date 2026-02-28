@@ -11,8 +11,6 @@
     --font-exo2: var(--font-exo2);
     --font-chivo: var(--font-chivo);
     --font-telex: var(--font-telex);
-    /* --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono); */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,7 +22,6 @@
 @theme {
     --font-sans: var(--font-exo2), ui-sans-serif, system-ui, sans-serif;
 
-    /* 2. DEFINE SECONDARY */
     --font-heading: var(--font-chivo), ui-sans-serif, system-ui, sans-serif;
 }
 body {

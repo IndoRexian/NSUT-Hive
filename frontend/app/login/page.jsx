@@ -65,22 +65,15 @@ export default function Basic() {
                 justify-center overflow-hidden relative
                 bg-[url('/background_login.svg')] bg-cover"
         >
-            {/* <div
-                className="absolute inset-0 bg-no-repeat bg-center
-                    bg-[length:1100px]"
-                style={{ backgroundImage: "url('/background_login.svg')" }}
-            /> */}
-            {/* <div className="absolute inset-0 bg-gradient-to-l from-black via-black/80 to-transparent" /> */}
             <AlertPopup error={error} />
             <div className="sm:w-1/2 relative z-10">
                 {handleForms(otpTime, dataTime)}
             </div>
-            {/* <Separator orientation="vertical" className="my-8 max-h-max" /> */}
+
             <div className="w-1/2 relative z-10 animate-slideInFromRight">
                 <div
                     className="flex flex-col items-center sm:justify-center
                         md:px-4 min-h-screen"
-                    // style={{backgroundImage: `url(${loginBackground})`}}
                 >
                     <Text className="text-3xl mb-2">
                         Login To Access these features

@@ -35,8 +35,14 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/verify-otp")  # for docs o
 
 @router.post("/login/send-otp/")
 async def login(body: Email, db: Session = Depends(get_db)):
-    """
-    Login
+    """Login
+
+    Parameters
+    ----------
+    body : Email
+        Contains Email ID
+    db : Session
+        Database session
     """
 
     otp = create_otp_entry(
@@ -47,25 +53,17 @@ async def login(body: Email, db: Session = Depends(get_db)):
     return {"status": "Done"}
 
 
-"""@router.post('/login/access-token')
-def login_access_token(
-    formdata:OAuth2AuthorizationCodeBearer,
-    x:OAuth2PasswordBearer
-)"""
-
-
-'''@router.get("/logout")
-def logout(request: Request):
-    """
-    Redirects the user to the Auth0 Universal Login (https://auth0.com/docs/authenticate/login/auth0-universal-login)
-    """
-    return {"message": "Logout"}'''
-
-
 @router.post("/login/verify-otp/")
 async def callback(body: OTPVerify, db: Session = Depends(get_db)):
     """
-    Callback redirect from Auth0
+    Callback redirection
+
+    Parameters
+    ----------
+    body : OTPVerify
+        Contains OTP & Email ID
+    db : Session
+        Database session
     """
     return verify_otp(body.email, body.otp, False, db=db)
 
@@ -73,7 +71,14 @@ async def callback(body: OTPVerify, db: Session = Depends(get_db)):
 @router.post("/login/verify-otp/final/")
 async def callback(body: OTPVerifyFinal, db: Session = Depends(get_db)):
     """
-    For New Users
+    Callback redirection For New Users
+
+    Parameters
+    ----------
+    body : OTPVerifyFinal
+        Contains OTP, Email ID, Username, Promotional Opt In Status & Avatar Style
+    db : Session
+        Database session
     """
     return verify_otp(
         body.email,

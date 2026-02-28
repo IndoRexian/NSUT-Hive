@@ -39,18 +39,14 @@ export default function ReviewCard({
     );
 
     useEffect(() => {
-        const nigger = async () => {
+        const changeUserReaction = async () => {
             if (userReaction?.state == 1) {
-                //userLiked = true;
-
                 setUserLiked(true);
             } else if (userReaction?.state == 0) {
-                //userDisliked = true;
-
                 setUserDisliked(true);
             }
         };
-        nigger();
+        changeUserReaction();
     }, [userReaction?.state]);
     if (userReaction?.state === 1) {
     } else if (userReaction?.state === 0) {
@@ -69,20 +65,18 @@ export default function ReviewCard({
             if (userDisliked === true) {
                 await executeDelete(review_id, (state = 0)); //remove old reaction
                 await executeAdd(review_id, (state = 1));
-                //await addReaction(review_id, (state = 1), pathName); //add new reaction
+
                 setUserLiked(true);
                 setUserDisliked(false);
-                //userLiked = true;
-                //userDisliked = false;
+
                 setLikes(likes + 1);
                 setDislikes(dislikes - 1);
             } else if (userLiked === true) {
                 await executeDelete(review_id, (state = 1)); //remove old reaction as user pressed it again
                 setUserLiked(false);
-                //userLiked = false;
+
                 setLikes(likes - 1);
             } else {
-                //await addReaction(review_id, (state = 1), pathName); //add new reaction
                 await executeAdd(review_id, (state = 1));
                 setUserLiked(true);
                 setLikes(likes + 1);
@@ -90,21 +84,19 @@ export default function ReviewCard({
         } else if (state === 0) {
             if (userLiked === true) {
                 await executeDelete(review_id, (state = 1));
-                //await addReaction(review_id, (state = 0), pathName);
+
                 await executeAdd(review_id, (state = 0));
                 setUserDisliked(true);
                 setUserLiked(false);
-                //userDisliked = true;
-                //userLiked = false;
+
                 setDislikes(dislikes + 1);
                 setLikes(likes - 1);
             } else if (userDisliked === true) {
                 await executeDelete(review_id, (state = 0));
                 setUserDisliked(false);
-                //userDisliked = false;
+
                 setDislikes(dislikes - 1);
             } else {
-                //await addReaction(review_id, (state = 0), pathName);
                 await executeAdd(review_id, (state = 0));
                 setUserDisliked(true);
                 setDislikes(dislikes + 1);

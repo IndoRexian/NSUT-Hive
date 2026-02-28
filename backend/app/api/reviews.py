@@ -1,13 +1,11 @@
 import uuid
-from typing import Annotated, Any, List, Sequence
+from typing import Annotated
 
 from database import get_db
-from db import schema
-from fastapi import APIRouter, Cookie, Depends, HTTPException, Request
-from models import reviews
+from fastapi import APIRouter, Cookie, Depends, HTTPException
 from pydantic import BaseModel
 from services.reviews import *
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
 router = APIRouter()
@@ -37,7 +35,7 @@ def api_post_review(
     token: Annotated[str | None, Cookie()] = None,
     db: Session = Depends(get_db),
 ):
-    print(token)
+
     try:
         # if
         return create_review(
@@ -62,7 +60,7 @@ def api_update_review(
     token: Annotated[str | None, Cookie()] = None,
     db: Session = Depends(get_db),
 ):
-    print(token)
+
     try:
         return edit_review(
             body.professor_id,
@@ -71,7 +69,7 @@ def api_update_review(
             body.review_text,
             db,
         )
-    except exc.SQLAlchemyError as e:
+    except SQLAlchemyError as e:
         raise HTTPException(status_code=422, detail=e._message())
 
 
@@ -82,9 +80,9 @@ def api_get_reviews(
     """
     Gets all reviews if userid is not supplied, otherwise only the pair is provided
 
-    :param profid: Description
+    :param profid: The Primary key professor ID, Not the Public ID.
     :type profid: int
-    :param userid: Description
+    :param userid: User ID
     :type userid: uuid.UUID
     """
     global_ratings = generate_final_rating(profid, db)
@@ -97,8 +95,6 @@ def api_get_reviews(
             )
     else:
         data = get_allreviews_prof(profid, db)
-        # if not data or not global_ratings:
-        #     raise HTTPException(404, detail="No review found for the Professor.")
         result = {"data": data}
     result.update(global_ratings)
     return result
@@ -113,14 +109,14 @@ def api_delete_reviews(
     """
     Gets all reviews if userid is not supplied, otherwise only the pair is provided
 
-    :param profid: Description
+    :param profid: The Primary key professor ID, Not the Public ID.
     :type profid: int
-    :param userid: Description
+    :param userid: User ID
     :type userid: uuid.UUID
     """
     try:
         return delete_review(token, body.professor_id, db)
-    except exc.SQLAlchemyError as e:
+    except SQLAlchemyError as e:
         raise HTTPException(status_code=422, detail=e._message())
 
 
@@ -132,9 +128,9 @@ def api_add_reaction(
 ):
     try:
         return add_reaction(body.review_id, token, body.state, db)
-    except exc.IntegrityError as e:
+    except IntegrityError as e:
         raise HTTPException(status_code=422, detail="Duplicate Entry Detected")
-    except exc.SQLAlchemyError as e:
+    except SQLAlchemyError as e:
         raise HTTPException(status_code=422, detail=e._message())
 
 
@@ -146,7 +142,7 @@ def api_delete_reaction(
 ):
     try:
         return delete_reaction(body.review_id, token, body.state, db)
-    except exc.SQLAlchemyError as e:
+    except SQLAlchemyError as e:
         raise HTTPException(status_code=422, detail=e._message())
 
 
@@ -160,7 +156,7 @@ def api_get_user_reactions(
     token: Annotated[str | None, Cookie()] = None,
     db: Session = Depends(get_db),
 ):
-    print("TOKEN:", token)
+
     data = get_user_reactions(token, body.profid, db)
     if not data:
         raise HTTPException(404, detail="No review found for the Professor.")
@@ -170,24 +166,20 @@ def api_get_user_reactions(
 @router.get("/review/cat/")
 def api_get_reviews(
     profid: int = None,
-    # token: Annotated[str | None, Cookie()] = None,
     db: Session = Depends(get_db),
 ):
     """
 
 
-    :param profid: Description
+    :param profid: The Primary key professor ID, Not the Public ID.
     :type profid: int
-    :param userid: Description
+    :param userid: User ID
     :type userid: uuid.UUID
     """
-    # data2 = get_user_reactions(token, profid, db)
     data = get_cat_prof(profid, db)
     if not data:
         raise HTTPException(404, detail="No review found for the Professor.")
-    # print(data)
     return data
-    # return {"data": list(data)}
 
 
 @router.get("/review/finalrating/")
@@ -195,9 +187,9 @@ def api_final_rating(profid: int, db: Session = Depends(get_db)):
     """
     Gets all reviews if userid is not supplied, otherwise only the pair is provided
 
-    :param profid: Description
+    :param profid: The Primary key professor ID, Not the Public ID.
     :type profid: int
-    :param userid: Description
+    :param userid: User ID
     :type userid: uuid.UUID
     """
 

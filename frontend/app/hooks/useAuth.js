@@ -3,7 +3,7 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import { useState, useTransition } from "react";
-// Optional: import toast library if you use one
+
 import { toast } from "sonner";
 
 export function useAuthAction(action) {
@@ -15,9 +15,9 @@ export function useAuthAction(action) {
         return new Promise((resolve, reject) => {
             startTransition(async () => {
                 try {
-                    // 1. Run the Server Action
+                    // Run the Server Action
                     const result = await action(...args);
-                    // 2. Check for Auth Error globally
+                    // Check for Auth Error globally
                     if (result?.error === "unauthenticated") {
                         toast.error("Please Login to Continue");
                         router.push(
@@ -27,7 +27,7 @@ export function useAuthAction(action) {
                         return;
                     }
 
-                    // 3. Pass successful result back to component
+                    // Pass successful result back to component
                     resolve(result);
                 } catch (error) {
                     reject(error);

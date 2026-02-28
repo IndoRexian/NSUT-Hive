@@ -1,7 +1,6 @@
 import React from "react";
 import { Tooltip } from "@heroui/react";
 import SvgComponent from "@/app/components/professors/SvgComponent";
-import { Text } from "@heroui/react";
 import { ReviewModal } from "./ReviewModal";
 import ReviewComments from "./ReviewComments";
 import { Icon } from "@iconify/react";

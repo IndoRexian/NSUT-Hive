@@ -1,15 +1,6 @@
 "use client";
 
-import {
-    Button,
-    Input,
-    Label,
-    Modal,
-    Surface,
-    Text,
-    TextArea,
-    useOverlayState,
-} from "@heroui/react";
+import { Button, Modal, Text, TextArea } from "@heroui/react";
 import SvgComponent from "@/app/components/professors/SvgComponent";
 import { useEffect, useState } from "react";
 import { submitReview, updateReview } from "@/app/lib/api";
@@ -26,7 +17,7 @@ function RatingStar({ index, value, onHover, onSelect }) {
         const half = x < rect.width / 2 ? 0.5 : 1;
 
         const newValue = index - 1 + half;
-        console.log(newValue);
+
         onHover(newValue);
     };
 
@@ -77,7 +68,7 @@ function StarFlex(displayValue, setHover, setRating, setDisabled, index) {
                         if (!next.includes(0)) {
                             setDisabled(false);
                         }
-                        console.log("selected");
+
                         return next;
                     })
                 }
@@ -125,8 +116,6 @@ export function ReviewModal({
     const { execute: executeUpdateReview, isPending: isPendingUpdateReview } =
         useAuthAction(updateReview);
     const onSubmit = async (renderProps) => {
-        //console.log(reviewText);
-        //console.log(profData);
         const finalReviewTest = reviewText ? reviewText.trim() : reviewText;
         try {
             if (!editMode) {

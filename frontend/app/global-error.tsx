@@ -1,9 +1,9 @@
 "use client";
 
 import * as Sentry from "@sentry/nextjs";
-import NextError from "next/error";
+
 import { useEffect } from "react";
-import { errorToast } from "./lib/toasts";
+
 import { Oswald, Rubik_80s_Fade } from "next/font/google";
 import Link from "next/link";
 const Four04Font = Rubik_80s_Fade({
@@ -49,11 +49,6 @@ export default function GlobalError({
                             </p>
                         </div>
                     </div>
-        {/* `NextError` is the default Next.js error page component. Its type
-        definition requires a `statusCode` prop. However, since the App Router
-        does not expose status codes for errors, we simply pass 0 to render a
-        generic error message. */}
-        {/* <NextError statusCode={0} /> */}
       </body>
     </html>
   );

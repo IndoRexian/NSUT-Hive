@@ -7,12 +7,12 @@ load_dotenv()
 
 
 class Config(BaseSettings):
-    app_name: str = "RMP"
+    app_name: str = "NSUT Hive"
     environment: str
     debug: bool = False
-    db_user: str = ""
-    db_password: str = ""
-    db_name: str = "RMP"
+    # db_user: str = ""
+    # db_password: str = ""
+    # db_name: str = "NSUT Hive"
     db_url: str = ""
 
     APP_SECRET_KEY: str
@@ -21,6 +21,7 @@ class Config(BaseSettings):
 
     TZ: ZoneInfo = ZoneInfo("Asia/Kolkata")
 
+    SMTP_EMAIL: str
     SMTP_KEY: str
 
     model_config = SettingsConfigDict(env_file=".env")

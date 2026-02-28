@@ -1,9 +1,4 @@
-import {
-    getBetaUsers,
-    sendOTP,
-    verifyOTP,
-    verifyOTPFinal,
-} from "@/app/lib/auth";
+import { sendOTP, verifyOTP, verifyOTPFinal } from "@/app/lib/auth";
 import { generateAvatar, generateUsername } from "@/app/lib/userdata";
 import {
     Avatar,
@@ -403,14 +398,6 @@ export function DataForm({ setError, setLoading, otp, email, redirect }) {
                             // isDisabled={buttonDisabled}
                         >
                             Login
-                            {/* {!loading ? (
-                            "Send OTP"
-                        ) : (
-                            <Icon
-                                icon="line-md:loading-twotone-loop"
-                                className="size-5"
-                            ></Icon>
-                        )} */}
                         </Button>
                     </div>
                 </div>

@@ -18,8 +18,8 @@ import ReviewCard from "./reviewCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
 import React from "react";
-import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
+
 const getList = (globalRating, size = 64) => {
     const rows = [];
     let key = 0;
@@ -579,8 +579,6 @@ export default function ReviewComments({
     profData,
     userReactions,
 }) {
-    //const [selfReview, setSelfReview] = useState({});
-    //const [otherReviews, setOtherReviews] = useState([]);
     const userData = useContext(UserDataContext);
     const [ifExists, selfReview, otherReviews] = checkUserComment(
         userData,
@@ -588,7 +586,7 @@ export default function ReviewComments({
     );
     const router = useRouter();
     const pathname = usePathname();
-    //console.log(selfReview, otherReviews);
+
     return (
         <div className="mt-2 mb-2">
             <div>

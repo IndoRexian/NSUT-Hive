@@ -21,7 +21,7 @@ def create_otp_entry(
     email: str, created_at: datetime, db: Session = Depends(get_db)
 ) -> str:
     otp = pyotp.TOTP(pyotp.random_base32()).now()
-    print(otp)
+
     otp_entry = schema.OTPTOKEN(
         email_hash=hash(email),
         otp_hash=hash(otp),
@@ -47,7 +47,7 @@ def create_otp_entry(
         )
         db.add(otp_entry)
         db.commit()
-    print(data)
+
     return otp
 
 
@@ -73,14 +73,12 @@ def verify_otp(
     """
     Returns access_token if everything goes well, and a 401 if OTP Invalid/Expired
 
-    :param email: Description
+    :param email: Email ID of user
     :type email: str
-    :param otp: Description
+    :param otp: OTP
     :type otp: str
-    :param db: Description
+    :param db: Database session
     :type db: Session
-    :return: Description
-    :rtype: User | dict
     """
     email_hash = hash(email)
     data = (
@@ -121,13 +119,6 @@ def verify_otp(
                     existing.user_id, timedelta(minutes=30)
                 )
                 return {"access_token": access_token, "detail": "Not New User"}
-                """if new_user_stage:
-                    force_expire_otp(email, otp, db)
-                    access_token = create_access_token(
-                        existing.user_id, timedelta(minutes=30)
-                    )
-                    return {"access_token": access_token, "detail":"Not New User"}
-                else:
-                    return HTTPException(status_code=200, detail="Not New User")"""
+
     else:
         raise HTTPException(status_code=401, detail="Invalid OTP")

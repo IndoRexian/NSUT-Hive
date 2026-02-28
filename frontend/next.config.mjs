@@ -15,7 +15,7 @@ const nextConfig = {
             },
             {
                 protocol: "https",
-                hostname: "cdn.nsuthive.com",
+                hostname: process.env.CDN_LINK,
                 pathname: "/**",
             },
         ],

@@ -53,7 +53,7 @@ def calculate_rating_per_cat(reviews_count: int, data: list):
     """
     Docstring for calculate_rating_per_cat
 
-    :param reviews_count: Description
+    :param reviews_count: Total reviews
     :type reviews_count: int
     :param data: The list for that specific CAT
     :type data: list

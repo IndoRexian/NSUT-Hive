@@ -7,12 +7,6 @@ export default function Loading() {
                 flex"
         >
             <div>
-                {/* <Icon
-                    icon="line-md:loading-twotone-loop"
-                    className="bg-cover justify-content-center items-center
-                        text-center size-100 animate-caret-blink"
-                    fill="true"
-                ></Icon> */}
                 <Image
                     src={NHLogo}
                     alt="LOADING"

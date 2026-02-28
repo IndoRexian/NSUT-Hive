@@ -8,7 +8,7 @@ export const metadata = {
         description: `Explore academic departments at NSUT and view student-submitted insights and professor reviews organized by department.`,
         images: [
             {
-                url: "https://cdn.nsuthive.com/NH_NOBG_1024.png",
+                url: "https://" + process.env.CDN_LINK + "/NH_NOBG_1024.png",
                 height: 512,
                 width: 512,
                 alt: "Logo of NSUT Hive",

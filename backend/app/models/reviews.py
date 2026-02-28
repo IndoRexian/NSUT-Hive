@@ -5,6 +5,10 @@ from pydantic import BaseModel
 
 
 class Review(BaseModel):
+    """
+    Pydantic Model for Reviews
+    """
+
     review_id: int
     professor_id: int
     user_id: uuid.UUID
@@ -23,6 +27,10 @@ class Review(BaseModel):
 
 
 class Reaction(BaseModel):
+    """
+    Pydantic Model for Reactions
+    """
+
     reaction_id: int
     user_id: uuid.UUID
     review_id: int

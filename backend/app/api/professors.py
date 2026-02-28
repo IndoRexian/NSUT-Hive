@@ -1,12 +1,10 @@
-from typing import List, Optional
+from typing import List
 
 from database import get_db
-from db import schema
 from fastapi import APIRouter, Depends, HTTPException
 from models import professors
 from services.departments import *
 from services.professors import *
-from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 router = APIRouter()
@@ -75,7 +73,7 @@ def get_professor(
         )
 
 
-@router.get("/professors/")  # response_model=List[professors.ProfessorOut])
+@router.get("/professors/")
 def get_professors(db: Session = Depends(get_db)):
     """
     Get all Professors at once.

@@ -1,12 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import select
-from sqlalchemy.orm import Session
 from typing import List
-from db import schema
-from database import get_db
-from services.departments import *
-from models import departments
 
+from database import get_db
+from fastapi import APIRouter, Depends, HTTPException
+from models import departments
+from services.departments import *
+from sqlalchemy.orm import Session
 
 router = APIRouter()
 
@@ -24,7 +22,6 @@ def get_department(deptid: int, db: Session = Depends(get_db)):
         If provided, the endpoint returns all professors in that department.
 
     """
-    print("request made"    )
     data = get_department_by_id(deptid, db)
     if not data:
         raise HTTPException(

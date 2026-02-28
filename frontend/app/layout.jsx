@@ -7,7 +7,7 @@ import UserProvider from "./components/UserProvider";
 import { Toaster } from "sonner";
 import { isAuthenticated } from "./lib/auth";
 import * as Sentry from "@sentry/nextjs";
-import Script from "next/script";
+
 const exo2 = Exo_2({
     weight: "400",
     variable: "--font-exo2",
@@ -31,7 +31,7 @@ export const metadata = {
         anonymous insights about professors and academics at NSUT — 
         helping students make better-informed decisions.`,
     openGraph: {
-        images: "https://cdn.nsuthive.com/NH_NOBG_1024.png",
+        images: "https://" + process.env.CDN_LINK + "/NH_NOBG_1024.png",
     },
 };
 

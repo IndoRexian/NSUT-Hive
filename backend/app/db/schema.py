@@ -1,11 +1,9 @@
 import uuid
 from datetime import datetime
 
-from fastapi import Depends, FastAPI, HTTPException, Query
-from pydantic import BaseModel
-from sqlalchemy import ForeignKey, String
+from sqlalchemy import ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class Base(DeclarativeBase):
@@ -92,7 +90,7 @@ class Review(Base):
 
 class Reaction(Base):
     __tablename__ = "reactions"
-    # reaction_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+
     user_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("users.user_id"), primary_key=True
     )

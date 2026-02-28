@@ -9,7 +9,7 @@ export default function robots() {
         ],
         sitemap: [
             "https://nsuthive.com/sitemap.xml",
-            "http://nsuthive.com/professors/sitemap.xml",
+            "https://nsuthive.com/professors/sitemap.xml",
         ],
     };
 }
