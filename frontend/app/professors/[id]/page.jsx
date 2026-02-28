@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
             images: [
                 {
                     url: profData.img_link
-                        ? `https://${process.env.CDN_LINK}/professors/${profData.professor_id}.png`
+                        ? `https://${process.env.NEXT_PUBLIC_CDN_LINK}/professors/${profData.professor_id}.png`
                         : `https://nsuthive.com/placeholder_pfp.png`,
                     height: 300,
                     width: 100,
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
 
             images: [
                 profData.img_link
-                    ? `https://${process.env.CDN_LINK}/professors/${profData.professor_id}.png`
+                    ? `https://${process.env.NEXT_PUBLIC_CDN_LINK}/professors/${profData.professor_id}.png`
                     : `https://nsuthive.com/placeholder_pfp.png`,
             ],
         },
@@ -61,7 +61,7 @@ export default async function page({ params }) {
                         className="ml-2 justify-content-center"
                         src={
                             profData.img_link
-                                ? `https://${process.env.CDN_LINK}/professors/${profData.professor_id}.png`
+                                ? `https://${process.env.NEXT_PUBLIC_CDN_LINK}/professors/${profData.professor_id}.png`
                                 : placeHolderPFP
                         }
                         height={100}

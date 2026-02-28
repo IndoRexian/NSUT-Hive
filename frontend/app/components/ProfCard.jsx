@@ -25,7 +25,7 @@ export default function ProfCard({ profData, deptData }) {
                         <Image
                             src={
                                 profData.img_link
-                                    ? `https://${process.env.CDN_LINK}/professors/${profData.professor_id}.png`
+                                    ? `https://${process.env.NEXT_PUBLIC_CDN_LINK}/professors/${profData.professor_id}.png`
                                     : placeHolderPFP
                             }
                             width={250}

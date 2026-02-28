@@ -15,7 +15,7 @@ const nextConfig = {
             },
             {
                 protocol: "https",
-                hostname: process.env.CDN_LINK,
+                hostname: process.env.NEXT_PUBLIC_CDN_LINK,
                 pathname: "/**",
             },
         ],

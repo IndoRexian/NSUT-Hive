@@ -31,7 +31,8 @@ export const metadata = {
         anonymous insights about professors and academics at NSUT — 
         helping students make better-informed decisions.`,
     openGraph: {
-        images: "https://" + process.env.CDN_LINK + "/NH_NOBG_1024.png",
+        images:
+            "https://" + process.env.NEXT_PUBLIC_CDN_LINK + "/NH_NOBG_1024.png",
     },
 };
 

@@ -11,7 +11,10 @@ export const metadata = {
     based on teaching effectiveness, grading fairness, attendance policy, and ease of workload.`,
         images: [
             {
-                url: "https://" + process.env.CDN_LINK + "/NH_NOBG_1024.png",
+                url:
+                    "https://" +
+                    process.env.NEXT_PUBLIC_CDN_LINK +
+                    "/NH_NOBG_1024.png",
                 height: 512,
                 width: 512,
                 alt: "Logo of NSUT Hive",
