@@ -1,0 +1,26 @@
+<svg id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+    <rect x="0" y="0" width="900" height="600" fill="#1A1A1A"></rect>
+    <defs>
+        <linearGradient id="grad1_0" x1="33.3%" y1="100%" x2="100%" y2="0%">
+            <stop offset="20%" stop-color="#1a1a1a" stop-opacity="1"></stop>
+            <stop offset="80%" stop-color="#1a1a1a" stop-opacity="1"></stop>
+        </linearGradient>
+    </defs>
+    <defs>
+        <linearGradient id="grad2_0" x1="0%" y1="100%" x2="66.7%" y2="0%">
+            <stop offset="20%" stop-color="#1a1a1a" stop-opacity="1"></stop>
+            <stop offset="80%" stop-color="#1a1a1a" stop-opacity="1"></stop>
+        </linearGradient>
+    </defs>
+    <g transform="translate(900, 600)">
+        <path
+            d="M-351.5 0C-295.1 -33.9 -238.8 -67.8 -216.5 -125C-194.3 -182.2 -206.2 -262.8 -175.8 -304.4C-145.4 -346.1 -72.7 -348.8 0 -351.5L0 0Z"
+            fill="#04534A"></path>
+    </g>
+    <g transform="translate(0, 0)">
+        <path
+            d="M351.5 0C292.4 32.3 233.2 64.6 211.3 122C189.4 179.4 204.8 262 175.8 304.4C146.8 346.9 73.4 349.2 0 351.5L0 0Z"
+            fill="#04534A"></path>
+    </g>
+</svg>
